@@ -16,12 +16,16 @@ import {Button} from './button';
 
 type Props = {
   isVisible: boolean;
+  isWalletLoading: boolean;
   setVisible: (isVisible: boolean) => void;
+  onContinue: (password: string) => Promise<void>;
 };
 
 export const PasswordSheet: React.FunctionComponent<Props> = ({
   isVisible,
+  isWalletLoading,
   setVisible,
+  onContinue,
 }) => {
   const insets = useSafeAreaInsets();
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -37,6 +41,7 @@ export const PasswordSheet: React.FunctionComponent<Props> = ({
       setErrorMessage("The entered passwords don't match!");
       return;
     }
+    onContinue(password);
   };
 
   return (
@@ -89,7 +94,9 @@ export const PasswordSheet: React.FunctionComponent<Props> = ({
                   />
                 </View>
                 <View style={styles.sectionContainer}>
-                  <Button onPress={onCreateWallet}>Create wallet</Button>
+                  <Button onPress={onCreateWallet} isLoading={isWalletLoading}>
+                    Create wallet
+                  </Button>
                   <Button type="tertiary" onPress={() => setVisible(false)}>
                     Cancel
                   </Button>
@@ -104,7 +111,10 @@ export const PasswordSheet: React.FunctionComponent<Props> = ({
 };
 
 const styles = StyleSheet.create({
-  screenContainer: {flex: 1, justifyContent: 'flex-end'},
+  screenContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
   blurView: {
     position: 'absolute',
     top: 0,
