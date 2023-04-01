@@ -35,8 +35,9 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
       if (key !== undefined) {
         getWallet(key);
       }
-      navigation.navigate('Home');
+      setPasswordModalOpen(false);
       setLoading(false);
+      navigation.navigate('Home');
     } catch (error) {
       console.log('onCreateWallet#error', (error as Error).message);
       setLoading(false);
@@ -50,7 +51,7 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
       <ScrollView
         style={styles.scrollContainer}
         contentContainerStyle={styles.container}>
-        <Text style={styles.title}>1. Recovery seed</Text>
+        <Text style={styles.title}>Recovery seed</Text>
         <Text style={styles.description}>
           Write down your 12-word phrase in the correct order without any
           spelling mistakes! The words need to be in the correct order to
