@@ -1,9 +1,10 @@
 import React, {PropsWithChildren} from 'react';
 import {
+  ActivityIndicator,
   GestureResponderEvent,
+  Pressable,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -11,6 +12,7 @@ type ButtonTypes = 'primary' | 'secondary' | 'tertiary';
 
 type Props = {
   type?: ButtonTypes;
+  isLoading?: boolean;
   onPress: (event: GestureResponderEvent) => void;
 };
 
@@ -28,17 +30,22 @@ const getStyle = (_type: ButtonTypes) => {
 
 export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
   type = 'primary',
+  isLoading,
   onPress,
   children,
 }) => {
   const styles = getStyle(type);
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <Pressable disabled={isLoading} onPress={onPress}>
       <View style={styles.buttonContainer}>
-        <Text style={styles.buttonText}>{children}</Text>
+        {isLoading ? (
+          <ActivityIndicator size={'small'} color={styles.buttonText.color} />
+        ) : null}
+
+        {!isLoading ? <Text style={styles.buttonText}>{children}</Text> : null}
       </View>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
