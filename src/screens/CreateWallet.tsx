@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -16,6 +16,7 @@ import {Button} from '../components/button';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {Chip} from '../components/chip';
 import {Input} from '../components/input';
+import {PasswordSheet} from '../components/passwordSheet';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateWallet'>;
@@ -24,9 +25,12 @@ type Props = {
 export const CreateWalletScreen: React.FunctionComponent<Props> = ({
   navigation,
 }) => {
+  const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
   const {randomWords, salt, setSalt, generateWords} = useRecoveryWords();
 
-  const onContinue = () => {};
+  const onContinue = () => {
+    setPasswordModalOpen(true);
+  };
 
   return (
     <SafeArea>
@@ -55,18 +59,15 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
           </View>
 
           <Text style={styles.description}>
-            To make the generated seed value more secure, you can add extra
-            characters. This allows you to produce completely different seeds
-            from the same generated words.
+            You can add extra characters, allowing you to produce completely
+            different seeds from the same generated words. Don't forget to write
+            it down along with the generated words.
           </Text>
 
           <Input
+            placeholder="Type something for extra safety"
             value={salt}
-            onChange={text => {
-              console.log('change', text);
-
-              setSalt(text);
-            }}
+            onChange={setSalt}
           />
 
           <View style={styles.buttonContainer}>
@@ -77,6 +78,10 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+      <PasswordSheet
+        isVisible={isPasswordModalOpen}
+        setVisible={setPasswordModalOpen}
+      />
     </SafeArea>
   );
 };

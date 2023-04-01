@@ -1,30 +1,53 @@
 import React, {useState} from 'react';
-import {StyleSheet, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import CloseIcon from '../../icons/close.svg';
 
 type Props = {
-  value: string;
-  onChange: (text: string) => void;
+  value?: string;
+  placeholder?: string;
+  errorMessage?: string;
+  secureTextEntry?: boolean;
+  onChange?: (text: string) => void;
 };
 
-export const Input: React.FunctionComponent<Props> = ({value, onChange}) => {
+export const Input: React.FunctionComponent<Props> = ({
+  placeholder,
+  value,
+  secureTextEntry,
+  errorMessage,
+  onChange,
+}) => {
   const [isFocused, setFocused] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={value}
-        onChange={e => onChange(e.nativeEvent.text)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-      />
-      {!isFocused && !!value && (
-        <TouchableOpacity onPress={() => onChange('')}>
-          <CloseIcon width={20} height={20} color={'#474E68'} />
-        </TouchableOpacity>
-      )}
-    </View>
+    <>
+      <View
+        style={[styles.container, errorMessage ? styles.errorContainer : {}]}>
+        <TextInput
+          style={styles.input}
+          value={value}
+          secureTextEntry={secureTextEntry}
+          placeholder={placeholder}
+          onChangeText={text => onChange?.(text)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+        />
+        {!isFocused && !!value && (
+          <TouchableOpacity onPress={() => onChange?.('')}>
+            <CloseIcon width={20} height={20} color={'#474E68'} />
+          </TouchableOpacity>
+        )}
+      </View>
+      {errorMessage ? (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      ) : null}
+    </>
   );
 };
 
@@ -38,8 +61,14 @@ const styles = StyleSheet.create({
     borderColor: '#474E68',
     flexDirection: 'row',
   },
+  errorContainer: {
+    borderColor: '#E63E6D',
+  },
   input: {
     flexGrow: 1,
     fontSize: 16,
+  },
+  errorMessage: {
+    color: '#E63E6D',
   },
 });
