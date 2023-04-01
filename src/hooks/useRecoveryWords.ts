@@ -2,28 +2,34 @@ import {useEffect, useState} from 'react';
 import {
   generateWords as _generateWords,
   wordsToSeedHex,
-} from '../libs/recoverySeed';
+} from '../libs/mnemonics';
+import * as secureStore from '../libs/secureStore';
 
 type UseRecoveryWords = () => {
-  salt: string;
-  setSalt: React.Dispatch<React.SetStateAction<string>>;
   randomWords: string[];
   generateWords: () => Promise<void>;
-  generateSeed: () => Promise<void>;
+  generateSeed: (password: string) => Promise<string | undefined>;
 };
 
 export const useRecoveryWords: UseRecoveryWords = () => {
   const [randomWords, setRandomWords] = useState<string[]>([]);
-  const [salt, setSalt] = useState<string>('');
 
   const generateWords = async () => {
     const words = await _generateWords(128);
-
     setRandomWords(words);
   };
 
-  const generateSeed = async () => {
-    const seedHex = await wordsToSeedHex(randomWords.join(' '), salt);
+  const generateSeed = async (
+    password: string,
+  ): Promise<string | undefined> => {
+    try {
+      const seedHex = await wordsToSeedHex(randomWords.join(' '), password);
+      await secureStore.saveData('private-key', seedHex);
+
+      return seedHex;
+    } catch (error) {
+      console.log('generateSeed#error', (error as Error).message);
+    }
   };
 
   useEffect(() => {
@@ -32,8 +38,6 @@ export const useRecoveryWords: UseRecoveryWords = () => {
   }, []);
 
   return {
-    salt,
-    setSalt: setSalt,
     randomWords,
     generateWords,
     generateSeed,
