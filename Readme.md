@@ -35,4 +35,7 @@ Note: Do not share your API key with others or commit it to any public repositor
 
 ## Demo
 
-https://user-images.githubusercontent.com/11165169/229310968-e193ba44-b81e-43fa-b09c-5802cf84cc65.mov
+
+https://user-images.githubusercontent.com/11165169/229542771-cb2b8eab-a862-42dd-b52a-814a683c6294.mov
+
+
