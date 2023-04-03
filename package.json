@@ -5,12 +5,15 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "ios:14": "react-native run-ios --simulator='iPhone 14'",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-clipboard/clipboard": "^1.11.2",
     "@react-native-community/blur": "^4.3.0",
+    "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "base-64": "^1.0.0",
