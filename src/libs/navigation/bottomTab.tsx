@@ -16,9 +16,9 @@ export const BottomTabNavigator: React.FunctionComponent = () => {
   const tabBarIcon = (routeName: string, color: string) => {
     switch (routeName) {
       case 'Home':
-        return <HomeIcon width={20} height={20} color={color} />;
+        return <HomeIcon width={24} height={24} color={color} />;
       case 'Account':
-        return <AccountIcon width={20} height={20} color={color} />;
+        return <AccountIcon width={24} height={24} color={color} />;
     }
   };
 

@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     height: 60,
-    paddingHorizontal: 16,
   },
   sideContainer: {
     flex: 1,
@@ -69,6 +68,7 @@ const primaryStyles = StyleSheet.create({
 const secondaryStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    paddingHorizontal: 16,
   },
   title: {
     fontSize: 16,

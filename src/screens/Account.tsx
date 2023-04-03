@@ -6,7 +6,8 @@ import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
 import ChevronRight from '../../icons/chevron-right.svg';
 import {useAccountState} from '../context/account.provider';
-import {HiddenTextView} from '../components/hiddenTextView';
+import {HiddenTextView} from '../components/textViews/hiddenTextView';
+import {CopyableText} from '../components/textViews/copyableText';
 
 type Props = {
   navigation: NativeStackNavigationProp<BottomTabParamList, 'Account'>;
@@ -14,16 +15,19 @@ type Props = {
 
 export const AccountScreen: React.FunctionComponent<Props> = () => {
   const {account, signOut} = useAccountState();
+
   return (
     <SafeArea>
       <View style={styles.container}>
         <Header title="Account" type="primary" />
         <View style={styles.content}>
-          <HiddenTextView text={account?.address} />
+          <CopyableText label="Address" text={account?.address} />
+
+          <HiddenTextView text={account?.privateKey} label="Private key" />
 
           <Pressable style={styles.itemRow} onPress={signOut}>
             <Text style={styles.itemRowTitle}>Log out</Text>
-            <ChevronRight width={20} height={20} color={'#000'} />
+            <ChevronRight width={24} height={24} color={'#000'} />
           </Pressable>
         </View>
       </View>
@@ -40,7 +44,7 @@ const styles = StyleSheet.create({
   },
   content: {
     paddingVertical: 18,
-    gap: 12,
+    gap: 16,
   },
   itemRow: {
     paddingVertical: 12,
