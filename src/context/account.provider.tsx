@@ -7,12 +7,11 @@ import React, {
 } from 'react';
 import {Account} from 'web3-core';
 import * as ethLib from '../libs/ethereum';
-import * as secureStore from '../libs/secureStore';
 
 export interface AccountContext {
   account: Account | null;
   balance: string | null;
-  getWallet: (privateKey: string) => void;
+  loadWallet: (privateKey: string) => void;
   signOut: () => void;
 }
 
@@ -33,7 +32,7 @@ export const AccountProvider = ({
   const [account, setAccount] = useState<Account | null>(null);
   const [balance, setBalance] = useState<string | null>(null);
 
-  const getWallet = (privateKey: string) => {
+  const loadWallet = (privateKey: string) => {
     const _account = ethLib.privateKeyToAccount(privateKey);
 
     setAccount(_account);
@@ -48,7 +47,6 @@ export const AccountProvider = ({
 
   const signOut = async () => {
     setAccount(null);
-    await secureStore.resetData();
   };
 
   useEffect(() => {
@@ -64,7 +62,7 @@ export const AccountProvider = ({
   const state: AccountContext = {
     account,
     balance,
-    getWallet,
+    loadWallet,
     signOut,
   };
 
