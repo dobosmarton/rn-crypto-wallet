@@ -4,12 +4,12 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
-import {RootStackParamList} from '../App';
 import {Button} from '../components/button';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {Chip} from '../components/chip';
 import {PasswordSheet} from '../components/passwordSheet';
 import {useAccountState} from '../context/account.provider';
+import {RootStackParamList} from '../libs/navigation';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateWallet'>;
@@ -20,7 +20,7 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
 }) => {
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const {getWallet} = useAccountState();
+  const {loadWallet} = useAccountState();
   const {randomWords, generateWords, generateSeed} = useRecoveryWords();
 
   const onContinue = () => {
@@ -33,11 +33,11 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
       const key = await generateSeed(password);
 
       if (key !== undefined) {
-        getWallet(key);
+        setPasswordModalOpen(false);
+        loadWallet(key);
       }
-      setPasswordModalOpen(false);
+
       setLoading(false);
-      navigation.navigate('Home');
     } catch (error) {
       console.log('onCreateWallet#error', (error as Error).message);
       setLoading(false);
@@ -46,7 +46,11 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
 
   return (
     <SafeArea>
-      <Header title="Create Wallet" onBack={() => navigation.goBack()} />
+      <Header
+        title="Create Wallet"
+        type="secondary"
+        onBack={() => navigation.goBack()}
+      />
 
       <ScrollView
         style={styles.scrollContainer}

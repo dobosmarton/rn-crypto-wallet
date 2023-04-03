@@ -4,23 +4,27 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Button} from '../components/button';
 import {SafeArea} from '../components/safeArea';
-import {RootStackParamList} from '../App';
 import * as secureStore from '../libs/secureStore';
 import {useAccountState} from '../context/account.provider';
+import {RootStackParamList} from '../libs/navigation';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;
 };
 
 export const LoginScreen: React.FunctionComponent<Props> = ({navigation}) => {
-  const {getWallet} = useAccountState();
+  const {loadWallet} = useAccountState();
 
   const onLogin = async () => {
     try {
       const walletKey = await secureStore.loadData();
+      console.log('walletKey', walletKey);
+
       if (walletKey) {
-        getWallet(walletKey.password);
-        navigation.navigate('Home');
+        loadWallet(walletKey.password);
+      } else {
+        // recover your wallet based on the mnemonics
+        // or create a new one
       }
     } catch (error) {
       console.log('onLogin#error', (error as Error).message);

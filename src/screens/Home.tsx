@@ -1,34 +1,25 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {SafeArea} from '../components/safeArea';
 import {useAccountState} from '../context/account.provider';
 import {CurrencyCard} from '../components/currencyCard';
-import {Button} from '../components/button';
-import {RootStackParamList} from '../App';
+import {BottomTabParamList} from '../libs/navigation/bottomTab';
+import {Header} from '../components/header';
 
 type Props = {
-  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+  navigation: NativeStackNavigationProp<BottomTabParamList, 'Home'>;
 };
 
-export const HomeScreen: React.FunctionComponent<Props> = ({navigation}) => {
-  const {balance, signOut} = useAccountState();
-
-  const _signOut = () => {
-    signOut();
-    navigation.popToTop();
-  };
+export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
+  const {balance} = useAccountState();
 
   return (
     <SafeArea>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Wallet</Text>
-          <Button type="tertiary" onPress={_signOut}>
-            Sign out
-          </Button>
-        </View>
+        <Header title="Wallet" type="primary" />
+
         <View style={styles.content}>
           <CurrencyCard name="Ethereum" balance={`${balance ?? 'NaN'} ETH`} />
         </View>
@@ -50,7 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   content: {
-    paddingVertical: 40,
+    paddingVertical: 18,
   },
   title: {
     fontSize: 32,
