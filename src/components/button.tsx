@@ -16,8 +16,8 @@ type Props = {
   onPress: (event: GestureResponderEvent) => void;
 };
 
-const getStyle = (_type: ButtonTypes) => {
-  switch (_type) {
+const getStyle = (type: ButtonTypes) => {
+  switch (type) {
     case 'secondary':
       return secondaryStyles;
     case 'tertiary':

@@ -2,21 +2,42 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from './button';
 
+type HeaderTypes = 'primary' | 'secondary';
+
 type Props = {
   title: string;
-  onBack: () => void;
+  type: HeaderTypes;
+  onBack?: () => void;
 };
 
-export const Header: React.FunctionComponent<Props> = ({title, onBack}) => {
+const getStyle = (type: HeaderTypes) => {
+  switch (type) {
+    case 'secondary':
+      return secondaryStyles;
+    case 'primary':
+    default:
+      return primaryStyles;
+  }
+};
+
+export const Header: React.FunctionComponent<Props> = ({
+  title,
+  type,
+  onBack,
+}) => {
+  const style = getStyle(type);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.sideContainer}>
-        <Button type="tertiary" onPress={onBack}>
-          Back
-        </Button>
-      </View>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.sideContainer} />
+    <View style={[styles.container, style.container]}>
+      {onBack ? (
+        <View style={styles.sideContainer}>
+          <Button type="tertiary" onPress={onBack}>
+            Back
+          </Button>
+        </View>
+      ) : null}
+      <Text style={[styles.title, style.title]}>{title}</Text>
+      {onBack ? <View style={styles.sideContainer} /> : null}
     </View>
   );
 };
@@ -25,13 +46,29 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
     height: 60,
     paddingHorizontal: 16,
   },
   sideContainer: {
     flex: 1,
     alignItems: 'flex-start',
+  },
+  title: {},
+});
+
+const primaryStyles = StyleSheet.create({
+  container: {
+    alignItems: 'flex-start',
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: '900',
+  },
+});
+
+const secondaryStyles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
   },
   title: {
     fontSize: 16,
