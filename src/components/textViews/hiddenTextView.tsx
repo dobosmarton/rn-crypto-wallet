@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {CopyableView} from './copyableView';
 import EyeIcon from '../../../icons/eye.svg';
 import EyeSlashIcon from '../../../icons/eye-slash.svg';
+import {shuffleCharacters} from '../../utils/string';
 
 type Props = {
   label?: string;
@@ -23,6 +24,10 @@ export const HiddenTextView: React.FunctionComponent<Props> = ({
     }
   };
 
+  // To make it safer, we shuffle the characters of the text
+  // when it's blured (not visible)
+  const hiddenText = useMemo(() => shuffleCharacters(text), [text]);
+
   return (
     <CopyableView
       label={label}
@@ -32,11 +37,11 @@ export const HiddenTextView: React.FunctionComponent<Props> = ({
         <Text style={styles.text}>{text}</Text>
       ) : (
         <View style={styles.hiddenContainer}>
-          <Text style={styles.hiddenText}>{text}</Text>
+          <Text style={styles.hiddenText}>{hiddenText}</Text>
           <BlurView
             style={styles.blurView}
             blurType="light"
-            blurAmount={2}
+            blurAmount={1}
             reducedTransparencyFallbackColor="white"
           />
         </View>

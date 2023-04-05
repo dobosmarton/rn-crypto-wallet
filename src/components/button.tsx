@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {
   ActivityIndicator,
-  GestureResponderEvent,
+  ButtonProps,
   Pressable,
   StyleSheet,
   Text,
@@ -10,10 +10,9 @@ import {
 
 type ButtonTypes = 'primary' | 'secondary' | 'tertiary';
 
-type Props = {
+type Props = Pick<ButtonProps, 'disabled' | 'onPress'> & {
   type?: ButtonTypes;
   isLoading?: boolean;
-  onPress: (event: GestureResponderEvent) => void;
 };
 
 const getStyle = (type: ButtonTypes) => {
@@ -32,13 +31,14 @@ export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
   type = 'primary',
   isLoading,
   onPress,
+  disabled,
   children,
 }) => {
   const styles = getStyle(type);
 
   return (
-    <Pressable disabled={isLoading} onPress={onPress}>
-      <View style={styles.buttonContainer}>
+    <Pressable disabled={disabled || isLoading} onPress={onPress}>
+      <View style={[styles.buttonContainer, disabled ? styles.disabled : {}]}>
         {isLoading ? (
           <ActivityIndicator size={'small'} color={styles.buttonText.color} />
         ) : null}
@@ -56,6 +56,9 @@ const primaryStyles = StyleSheet.create({
     borderRadius: 160,
     alignItems: 'center',
   },
+  disabled: {
+    backgroundColor: '#ccc',
+  },
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
@@ -71,6 +74,9 @@ const secondaryStyles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#000',
   },
+  disabled: {
+    borderColor: '#ccc',
+  },
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
@@ -82,6 +88,9 @@ const tertiaryStyles = StyleSheet.create({
   buttonContainer: {
     paddingVertical: 14,
     alignItems: 'center',
+  },
+  disabled: {
+    opacity: 0.6,
   },
   buttonText: {
     fontSize: 18,

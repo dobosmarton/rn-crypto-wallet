@@ -3,16 +3,24 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TextInputProps,
   TouchableOpacity,
   View,
 } from 'react-native';
 import CloseIcon from '../../icons/close.svg';
 
-type Props = {
-  value?: string;
-  placeholder?: string;
+type Props = Pick<
+  TextInputProps,
+  | 'value'
+  | 'editable'
+  | 'selectTextOnFocus'
+  | 'placeholder'
+  | 'secureTextEntry'
+  | 'autoCapitalize'
+  | 'autoFocus'
+  | 'onPressIn'
+> & {
   errorMessage?: string;
-  secureTextEntry?: boolean;
   onChange?: (text: string) => void;
 };
 
@@ -21,6 +29,11 @@ export const Input: React.FunctionComponent<Props> = ({
   value,
   secureTextEntry,
   errorMessage,
+  editable,
+  selectTextOnFocus,
+  autoCapitalize,
+  autoFocus,
+  onPressIn,
   onChange,
 }) => {
   const [isFocused, setFocused] = useState(false);
@@ -32,13 +45,18 @@ export const Input: React.FunctionComponent<Props> = ({
         <TextInput
           style={styles.input}
           value={value}
+          editable={editable}
+          selectTextOnFocus={selectTextOnFocus}
           secureTextEntry={secureTextEntry}
           placeholder={placeholder}
+          onPressIn={onPressIn}
           onChangeText={text => onChange?.(text)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          autoCapitalize={autoCapitalize}
+          autoFocus={autoFocus}
         />
-        {!isFocused && !!value && (
+        {!isFocused && !!value && editable && (
           <TouchableOpacity onPress={() => onChange?.('')}>
             <CloseIcon width={20} height={20} color={'#474E68'} />
           </TouchableOpacity>
