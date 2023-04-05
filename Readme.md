@@ -44,10 +44,12 @@ Note: Do not share your API key with others or commit it to any public repositor
 
 ### Create a wallet
 
-https://user-images.githubusercontent.com/11165169/230118064-5e022494-7d87-4613-a526-d744c2110bd4.mov
+https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov
+
 
 ### Restore a wallet
 
-https://user-images.githubusercontent.com/11165169/230118248-e9c2b63e-76c6-465f-917e-671578e1a7f0.mov
+https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov
+
 
 
