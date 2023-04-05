@@ -27,6 +27,7 @@
     "react-native-screens": "^3.20.0",
     "react-native-securerandom": "^1.0.1",
     "react-native-sha256": "^1.4.9",
+    "react-native-snackbar": "^2.4.0",
     "react-native-svg": "^13.9.0",
     "web3": "^1.9.0"
   },

@@ -1,5 +1,6 @@
-import React, {PropsWithChildren, useRef, useState} from 'react';
+import React, {PropsWithChildren} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import Snackbar from 'react-native-snackbar';
 
 type Props = {
   label?: string;
@@ -10,21 +11,13 @@ type Props = {
 export const CopyableView: React.FunctionComponent<
   PropsWithChildren<Props>
 > = ({label, disabled, children, onCopyPressed}) => {
-  const [isCopiedVisible, setCopiedVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const onCopy = () => {
-    if (!isCopiedVisible) {
-      onCopyPressed();
-      setCopiedVisible(true);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
+    onCopyPressed();
 
-      timeoutRef.current = setTimeout(() => {
-        setCopiedVisible(false);
-      }, 3000);
-    }
+    Snackbar.show({
+      text: `The  ${label ?? 'text'} is copied to the clipboard!`,
+      duration: Snackbar.LENGTH_SHORT,
+    });
   };
 
   return (
@@ -33,13 +26,6 @@ export const CopyableView: React.FunctionComponent<
       <Pressable style={styles.container} disabled={disabled} onPress={onCopy}>
         {children}
       </Pressable>
-      {isCopiedVisible && (
-        <View style={styles.copiedView}>
-          <Text style={styles.copiedText}>
-            The text is copied to the clipboard!
-          </Text>
-        </View>
-      )}
     </View>
   );
 };
