@@ -131,10 +131,6 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     gap: 12,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: '900',
-  },
   description: {
     fontSize: 14,
     lineHeight: 20,

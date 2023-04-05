@@ -33,9 +33,13 @@ ETHEREUM_ENDPOINT=
 
 Note: Do not share your API key with others or commit it to any public repository. Keep it safe and secure.
 
+## Features
+
+- Create Wallet based on Mnemonics and custom password
+- View ethereum balance
+- View and copy address and private key
+- Restore account based on Mnemonics and password
+
 ## Demo
 
-
 https://user-images.githubusercontent.com/11165169/229542771-cb2b8eab-a862-42dd-b52a-814a683c6294.mov
-
-

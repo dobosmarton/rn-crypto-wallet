@@ -54,7 +54,6 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
       <ScrollView
         style={styles.scrollContainer}
         contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Recovery seed</Text>
         <Text style={styles.description}>
           Write down your 12-word phrase in the correct order without any
           spelling mistakes! The words need to be in the correct order to
@@ -97,10 +96,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
     gap: 12,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '900',
   },
   description: {
     fontSize: 14,
