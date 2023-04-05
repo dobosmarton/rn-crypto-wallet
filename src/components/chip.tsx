@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {BLUE} from '../utils/colors';
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 12,
     paddingVertical: 8,
-    backgroundColor: '#1C6DD0',
+    backgroundColor: BLUE,
     borderRadius: 100,
     justifyContent: 'center',
   },

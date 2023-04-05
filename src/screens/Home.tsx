@@ -6,7 +6,7 @@ import {SafeArea} from '../components/safeArea';
 import {useAccountState} from '../context/account.provider';
 import {CurrencyBalance} from '../components/currencyBalance';
 import {BottomTabParamList} from '../libs/navigation/bottomTab';
-import {Header} from '../components/header';
+import {BLUE} from '../utils/colors';
 
 type Props = {
   navigation: NativeStackNavigationProp<BottomTabParamList, 'Home'>;
@@ -18,11 +18,9 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
   return (
     <SafeArea>
       <View style={styles.container}>
-        <Header title="Wallet" type="primary" />
-
         <View style={styles.content}>
           {isBalanceLoading ? (
-            <ActivityIndicator size={'small'} />
+            <ActivityIndicator size={'small'} color={BLUE} />
           ) : (
             <CurrencyBalance
               name="Ethereum"
@@ -42,23 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-  },
   content: {
-    paddingVertical: 18,
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: '900',
-  },
-  signOut: {
-    fontSize: 18,
-  },
-  balanceText: {
-    fontSize: 18,
-    fontWeight: '400',
+    paddingVertical: 24,
   },
 });

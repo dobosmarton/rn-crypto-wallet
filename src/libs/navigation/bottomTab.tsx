@@ -1,9 +1,11 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabBarProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import {HomeScreen} from '../../screens/Home';
 import {AccountScreen} from '../../screens/Account';
-import HomeIcon from '../../../icons/home.svg';
-import AccountIcon from '../../../icons/account.svg';
+import {BottomTabBar} from '../../components/bottomTabBar';
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -13,22 +15,15 @@ export type BottomTabParamList = {
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 export const BottomTabNavigator: React.FunctionComponent = () => {
-  const tabBarIcon = (routeName: string, color: string) => {
-    switch (routeName) {
-      case 'Home':
-        return <HomeIcon width={24} height={24} color={color} />;
-      case 'Account':
-        return <AccountIcon width={24} height={24} color={color} />;
-    }
-  };
+  const renderBottomTab = (props: BottomTabBarProps) => (
+    <BottomTabBar {...props} />
+  );
 
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      tabBar={renderBottomTab}
+      screenOptions={() => ({
         headerShown: false,
-        tabBarIcon: ({color}) => tabBarIcon(route.name, color),
-        tabBarActiveTintColor: '#10A19D',
-        tabBarInactiveTintColor: '#474E68',
       })}>
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />

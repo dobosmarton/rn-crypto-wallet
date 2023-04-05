@@ -4,7 +4,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {BottomTabParamList} from '../libs/navigation/bottomTab';
 import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
-import ChevronRight from '../../icons/chevron-right.svg';
+import ChevronRight from '../../assets/icons/chevron-right.svg';
 import {useAccountState} from '../context/account.provider';
 import {HiddenTextView} from '../components/textViews/hiddenTextView';
 import {CopyableText} from '../components/textViews/copyableText';

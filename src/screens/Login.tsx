@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import Lottie from 'lottie-react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {Button} from '../components/button';
@@ -7,6 +8,7 @@ import {SafeArea} from '../components/safeArea';
 import * as secureStore from '../libs/secureStore';
 import {useAccountState} from '../context/account.provider';
 import {RootStackParamList} from '../libs/navigation';
+import StarterAnimation from '../../assets/starter-animation.json';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;
@@ -34,7 +36,9 @@ export const LoginScreen: React.FunctionComponent<Props> = ({navigation}) => {
   return (
     <SafeArea>
       <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
+        <View style={styles.animationView}>
+          <Lottie source={StarterAnimation} autoPlay loop />
+        </View>
 
         <View style={styles.buttonContainer}>
           <Button onPress={onLogin}>Login</Button>
@@ -56,9 +60,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: '900',
+  animationView: {
+    flexGrow: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonContainer: {
     flexGrow: 1,

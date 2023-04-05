@@ -3,8 +3,8 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {BlurView} from '@react-native-community/blur';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {CopyableView} from './copyableView';
-import EyeIcon from '../../../icons/eye.svg';
-import EyeSlashIcon from '../../../icons/eye-slash.svg';
+import EyeIcon from '../../../assets/icons/eye.svg';
+import EyeSlashIcon from '../../../assets/icons/eye-slash.svg';
 import {shuffleCharacters} from '../../utils/string';
 
 type Props = {

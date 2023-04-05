@@ -1,16 +1,17 @@
 import React, {PropsWithChildren} from 'react';
 import {
   ActivityIndicator,
-  ButtonProps,
   Pressable,
+  PressableProps,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import {BLUE, GREEN} from '../utils/colors';
 
 type ButtonTypes = 'primary' | 'secondary' | 'tertiary';
 
-type Props = Pick<ButtonProps, 'disabled' | 'onPress'> & {
+type Props = Pick<PressableProps, 'disabled' | 'onPress' | 'hitSlop'> & {
   type?: ButtonTypes;
   isLoading?: boolean;
 };
@@ -32,12 +33,16 @@ export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
   isLoading,
   onPress,
   disabled,
+  hitSlop,
   children,
 }) => {
   const styles = getStyle(type);
 
   return (
-    <Pressable disabled={disabled || isLoading} onPress={onPress}>
+    <Pressable
+      hitSlop={hitSlop}
+      disabled={disabled || isLoading}
+      onPress={onPress}>
       <View style={[styles.buttonContainer, disabled ? styles.disabled : {}]}>
         {isLoading ? (
           <ActivityIndicator size={'small'} color={styles.buttonText.color} />
@@ -52,7 +57,7 @@ export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
 const primaryStyles = StyleSheet.create({
   buttonContainer: {
     paddingVertical: 14,
-    backgroundColor: '#10A19D',
+    backgroundColor: GREEN,
     borderRadius: 160,
     alignItems: 'center',
   },
@@ -62,7 +67,7 @@ const primaryStyles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#FFF',
+    color: BLUE,
   },
 });
 
@@ -72,7 +77,7 @@ const secondaryStyles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 160,
     borderWidth: 2,
-    borderColor: '#000',
+    borderColor: BLUE,
   },
   disabled: {
     borderColor: '#ccc',
@@ -80,7 +85,7 @@ const secondaryStyles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#000',
+    color: BLUE,
   },
 });
 
@@ -95,6 +100,6 @@ const tertiaryStyles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#000',
+    color: BLUE,
   },
 });

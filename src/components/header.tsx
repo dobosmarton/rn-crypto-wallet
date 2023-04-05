@@ -1,6 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Button} from './button';
+import ChevronLeft from '../../assets/icons/chevron-left.svg';
+import {BLUE} from '../utils/colors';
 
 type HeaderTypes = 'primary' | 'secondary';
 
@@ -31,8 +33,8 @@ export const Header: React.FunctionComponent<Props> = ({
     <View style={[styles.container, style.container]}>
       {onBack ? (
         <View style={styles.sideContainer}>
-          <Button type="tertiary" onPress={onBack}>
-            Back
+          <Button type="tertiary" hitSlop={40} onPress={onBack}>
+            <ChevronLeft width={20} height={20} color={BLUE} />
           </Button>
         </View>
       ) : null}

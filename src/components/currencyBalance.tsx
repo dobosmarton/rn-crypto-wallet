@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {BLUE} from '../utils/colors';
 
 type Props = {
   name: string;
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
   balance: {
     fontSize: 40,
     fontWeight: '900',
+    color: BLUE,
   },
   name: {
     fontSize: 24,

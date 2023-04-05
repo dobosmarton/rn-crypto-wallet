@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import CloseIcon from '../../icons/close.svg';
+import CloseIcon from '../../assets/icons/close.svg';
+import {BLUE} from '../utils/colors';
 
 type Props = Pick<
   TextInputProps,
@@ -58,7 +59,7 @@ export const Input: React.FunctionComponent<Props> = ({
         />
         {!isFocused && !!value && editable && (
           <TouchableOpacity onPress={() => onChange?.('')}>
-            <CloseIcon width={20} height={20} color={'#474E68'} />
+            <CloseIcon width={20} height={20} color={BLUE} />
           </TouchableOpacity>
         )}
       </View>
