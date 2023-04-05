@@ -8,7 +8,10 @@ import * as secureStore from '../libs/secureStore';
 type UseRecoveryWords = () => {
   randomWords: string[];
   generateWords: () => Promise<void>;
-  generateSeed: (password: string) => Promise<string | undefined>;
+  generateSeed: (
+    password: string,
+    words?: string[],
+  ) => Promise<string | undefined>;
 };
 
 export const useRecoveryWords: UseRecoveryWords = () => {
@@ -21,9 +24,10 @@ export const useRecoveryWords: UseRecoveryWords = () => {
 
   const generateSeed = async (
     password: string,
+    words: string[] = randomWords,
   ): Promise<string | undefined> => {
     try {
-      const seedHex = await wordsToSeedHex(randomWords.join(' '), password);
+      const seedHex = await wordsToSeedHex(words.join(' '), password);
       await secureStore.saveData('private-key', seedHex);
 
       return seedHex;

@@ -77,49 +77,6 @@ export const wordsToSeedHex = async (
   return seed.toString('hex');
 };
 
-// const wordsToEntropy = async (
-//   mnemonic: string,
-//   wordlist: string[] = wordList,
-// ): Promise<string> => {
-//   const words = mnemonic.split(' ');
-
-//   if (words.length % 3 !== 0) {
-//     throw new Error('Invalid mnemonic');
-//   }
-
-//   const belongToList = words.every(word => wordlist.indexOf(word) > -1);
-
-//   if (!belongToList) {
-//     throw new Error('Invalid mnemonic');
-//   }
-
-//   // convert word indices to 11 bit binary strings
-//   const bits = words
-//     .map(word => {
-//       const index = wordlist.indexOf(word);
-//       return lpad(index.toString(2), '0', 11);
-//     })
-//     .join('');
-
-//   // split the binary string into ENT/CS
-//   const dividerIndex = Math.floor(bits.length / 33) * 32;
-//   const entropy = bits.slice(0, dividerIndex);
-//   const checksum = bits.slice(dividerIndex);
-
-//   // calculate the checksum and compare
-//   const entropyBytes = (entropy.match(/(.{1,8})/g) as Array<string>).map(bin =>
-//     parseInt(bin, 2),
-//   );
-//   const entropyBuffer = Buffer.from(entropyBytes);
-//   const newChecksum = await checksumBits(entropyBuffer);
-
-//   if (newChecksum !== checksum) {
-//     throw new Error('Invalid mnemonic checksum');
-//   }
-
-//   return entropyBuffer.toString('hex');
-// };
-
 export const generateWords = async (
   strength: number = 128,
   wordlist: string[] = wordList,
@@ -129,15 +86,3 @@ export const generateWords = async (
 
   return entropyToWords(hexBuffer, wordlist);
 };
-
-// const validateWords = (
-//   mnemonic: string,
-//   wordlist: string[] = wordList,
-// ): boolean => {
-//   try {
-//     wordsToEntropy(mnemonic, wordlist);
-//   } catch (e) {
-//     return false;
-//   }
-//   return true;
-// };

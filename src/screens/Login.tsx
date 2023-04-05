@@ -18,13 +18,13 @@ export const LoginScreen: React.FunctionComponent<Props> = ({navigation}) => {
   const onLogin = async () => {
     try {
       const walletKey = await secureStore.loadData();
-      console.log('walletKey', walletKey);
 
       if (walletKey) {
         loadWallet(walletKey.password);
       } else {
         // recover your wallet based on the mnemonics
         // or create a new one
+        navigation.navigate('RestoreWallet');
       }
     } catch (error) {
       console.log('onLogin#error', (error as Error).message);

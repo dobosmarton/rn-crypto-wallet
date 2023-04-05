@@ -1,10 +1,10 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 import {SafeArea} from '../components/safeArea';
 import {useAccountState} from '../context/account.provider';
-import {CurrencyCard} from '../components/currencyCard';
+import {CurrencyBalance} from '../components/currencyBalance';
 import {BottomTabParamList} from '../libs/navigation/bottomTab';
 import {Header} from '../components/header';
 
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
-  const {balance} = useAccountState();
+  const {balance, isBalanceLoading} = useAccountState();
 
   return (
     <SafeArea>
@@ -21,7 +21,14 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
         <Header title="Wallet" type="primary" />
 
         <View style={styles.content}>
-          <CurrencyCard name="Ethereum" balance={`${balance ?? 'NaN'} ETH`} />
+          {isBalanceLoading ? (
+            <ActivityIndicator size={'small'} />
+          ) : (
+            <CurrencyBalance
+              name="Ethereum"
+              balance={`${balance ?? 'NaN'} ETH`}
+            />
+          )}
         </View>
       </View>
     </SafeArea>

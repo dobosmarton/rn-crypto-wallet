@@ -7,9 +7,10 @@ import {Header} from '../components/header';
 import {Button} from '../components/button';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {Chip} from '../components/chip';
-import {PasswordSheet} from '../components/passwordSheet';
 import {useAccountState} from '../context/account.provider';
 import {RootStackParamList} from '../libs/navigation';
+import {useLoading} from '../hooks/useLoading';
+import {CreatePasswordSheet} from '../components/actionSheets/createPasswordSheet';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateWallet'>;
@@ -19,7 +20,8 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
   navigation,
 }) => {
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
-  const [isLoading, setLoading] = useState(false);
+  const {isLoading, withLoading} = useLoading();
+
   const {loadWallet} = useAccountState();
   const {randomWords, generateWords, generateSeed} = useRecoveryWords();
 
@@ -27,22 +29,19 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
     setPasswordModalOpen(true);
   };
 
-  const onCreateWallet = async (password: string) => {
-    try {
-      setLoading(true);
-      const key = await generateSeed(password);
+  const onCreateWallet = (password: string) =>
+    withLoading(async () => {
+      try {
+        const key = await generateSeed(password);
 
-      if (key !== undefined) {
-        setPasswordModalOpen(false);
-        loadWallet(key);
+        if (key !== undefined) {
+          setPasswordModalOpen(false);
+          loadWallet(key);
+        }
+      } catch (error) {
+        console.log('onCreateWallet#error', (error as Error).message);
       }
-
-      setLoading(false);
-    } catch (error) {
-      console.log('onCreateWallet#error', (error as Error).message);
-      setLoading(false);
-    }
-  };
+    });
 
   return (
     <SafeArea>
@@ -78,7 +77,7 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
         </View>
       </ScrollView>
 
-      <PasswordSheet
+      <CreatePasswordSheet
         isVisible={isPasswordModalOpen}
         isWalletLoading={isLoading}
         setVisible={setPasswordModalOpen}

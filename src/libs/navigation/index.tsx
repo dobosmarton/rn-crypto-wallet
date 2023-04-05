@@ -5,11 +5,13 @@ import {LoginScreen} from '../../screens/Login';
 import {CreateWalletScreen} from '../../screens/CreateWallet';
 import {BottomTabNavigator} from './bottomTab';
 import {useAccountState} from '../../context/account.provider';
+import {RestoreWalletScreen} from '../../screens/RestoreWallet';
 
 export type RootStackParamList = {
   Login: undefined;
   CreateWallet: undefined;
   LoggedIn: undefined;
+  RestoreWallet: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -25,6 +27,10 @@ export const NavigationRoot: React.FunctionComponent = () => {
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="CreateWallet" component={CreateWalletScreen} />
+            <Stack.Screen
+              name="RestoreWallet"
+              component={RestoreWalletScreen}
+            />
           </>
         ) : (
           <Stack.Screen name="LoggedIn" component={BottomTabNavigator} />
