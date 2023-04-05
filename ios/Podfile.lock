@@ -77,6 +77,10 @@ PODS:
     - hermes-engine/Pre-built (= 0.71.5)
   - hermes-engine/Pre-built (0.71.5)
   - libevent (2.1.12)
+  - lottie-ios (3.5.0)
+  - lottie-react-native (6.0.0-rc.3):
+    - lottie-ios (~> 3.5.0)
+    - React-Core
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.07.22.00):
     - boost
@@ -427,6 +431,33 @@ PODS:
     - React-Core
   - RNKeychain (8.1.1):
     - React-Core
+  - RNReanimated (3.0.2):
+    - DoubleConversion
+    - FBLazyVector
+    - FBReactNativeSpec
+    - glog
+    - RCT-Folly
+    - RCTRequired
+    - RCTTypeSafety
+    - React-callinvoker
+    - React-Core
+    - React-Core/DevSupport
+    - React-Core/RCTWebSocket
+    - React-CoreModules
+    - React-cxxreact
+    - React-jsi
+    - React-jsiexecutor
+    - React-jsinspector
+    - React-RCTActionSheet
+    - React-RCTAnimation
+    - React-RCTBlob
+    - React-RCTImage
+    - React-RCTLinking
+    - React-RCTNetwork
+    - React-RCTSettings
+    - React-RCTText
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (3.20.0):
     - React-Core
     - React-RCTImage
@@ -472,6 +503,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - libevent (~> 2.1.12)
+  - lottie-react-native (from `../node_modules/lottie-react-native`)
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -507,6 +539,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCClipboard (from `../node_modules/@react-native-clipboard/clipboard`)"
   - RNKeychain (from `../node_modules/react-native-keychain`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSecureRandom (from `../node_modules/react-native-securerandom`)
   - RNSha256 (from `../node_modules/react-native-sha256`)
@@ -528,6 +561,7 @@ SPEC REPOS:
     - FlipperKit
     - fmt
     - libevent
+    - lottie-ios
     - OpenSSL-Universal
     - SocketRocket
     - YogaKit
@@ -545,6 +579,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
+  lottie-react-native:
+    :path: "../node_modules/lottie-react-native"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -609,6 +645,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-clipboard/clipboard"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSecureRandom:
@@ -641,6 +679,8 @@ SPEC CHECKSUMS:
   glog: 04b94705f318337d7ead9e6d17c019bd9b1f6b1b
   hermes-engine: 0784cadad14b011580615c496f77e0ae112eed75
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
+  lottie-ios: c55158d67d0629a260625cc2ded2052b829e3c3e
+  lottie-react-native: 4b07ce6d17647dd24641ae5cd7ae614034318456
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 424b8c9a7a0b9ab2886ffe9c3b041ef628fd4fb1
   RCTRequired: bd6045fbd511da5efe6db89eecb21e4e36bd7cbf
@@ -674,6 +714,7 @@ SPEC CHECKSUMS:
   ReactCommon: 4f43b72066f27bfe1f63838c61763f59e7112536
   RNCClipboard: 3f0451a8100393908bea5c5c5b16f96d45f30bfc
   RNKeychain: ff836453cba46938e0e9e4c22e43d43fa2c90333
+  RNReanimated: f0dd6b881808e635ef0673f89642937d6c141314
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   RNSecureRandom: 07efbdf2cd99efe13497433668e54acd7df49fef
   RNSha256: a6bc3640a34eb41907e363828b9ec742c274298d
