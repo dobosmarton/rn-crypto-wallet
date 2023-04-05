@@ -36,10 +36,18 @@ Note: Do not share your API key with others or commit it to any public repositor
 ## Features
 
 - Create Wallet based on Mnemonics and custom password
-- View ethereum balance
+- View Ethereum balance
 - View and copy address and private key
 - Restore account based on Mnemonics and password
 
 ## Demo
 
-https://user-images.githubusercontent.com/11165169/229542771-cb2b8eab-a862-42dd-b52a-814a683c6294.mov
+### Create a wallet
+
+https://user-images.githubusercontent.com/11165169/230118064-5e022494-7d87-4613-a526-d744c2110bd4.mov
+
+### Restore a wallet
+
+https://user-images.githubusercontent.com/11165169/230118248-e9c2b63e-76c6-465f-917e-671578e1a7f0.mov
+
+
