@@ -42,9 +42,13 @@ Note: Do not share your API key with others or commit it to any public repositor
 
 ## Demo
 
-- [Creating a wallet](https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov)
+### Creating a wallet
 
-- [Restore a wallet](https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov)
+https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov
+
+### Restoring a wallet
+
+https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov
 
 ## Resources
 
