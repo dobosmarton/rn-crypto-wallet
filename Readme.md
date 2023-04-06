@@ -42,14 +42,10 @@ Note: Do not share your API key with others or commit it to any public repositor
 
 ## Demo
 
-### Create a wallet
+- [Creating a wallet](https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov)
 
-https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov
+- [Restore a wallet](https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov)
 
+## Resources
 
-### Restore a wallet
-
-https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov
-
-
-
+- [Prelogin animation](https://lottiefiles.com/141560-loader-v25)
