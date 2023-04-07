@@ -3,9 +3,9 @@ import {
   BottomTabBarProps,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {HomeScreen} from '../../screens/Home';
-import {AccountScreen} from '../../screens/Account';
-import {BottomTabBar} from '../../components/bottomTabBar';
+import {HomeScreen} from '../screens/Home';
+import {AccountScreen} from '../screens/Account';
+import {BottomTabBar} from '../components/bottomTabBar';
 
 export type BottomTabParamList = {
   Home: undefined;

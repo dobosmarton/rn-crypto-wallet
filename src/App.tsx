@@ -13,7 +13,7 @@ import './utils/base64';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {AccountProvider} from './context/account.provider';
-import {NavigationRoot} from './libs/navigation';
+import {NavigationRoot} from './navigation';
 
 function App(): JSX.Element {
   return (

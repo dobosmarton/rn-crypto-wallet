@@ -1,7 +1,7 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {BottomTabParamList} from '../libs/navigation/bottomTab';
+import {BottomTabParamList} from '../navigation/bottomTab';
 import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
 import ChevronRight from '../../assets/icons/chevron-right.svg';

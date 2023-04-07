@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
-import {RootStackParamList} from '../libs/navigation';
+import {RootStackParamList} from '../navigation';
 import {Button} from '../components/button';
 import {PasswordSheet} from '../components/actionSheets/passwordSheet';
 import {useLoading} from '../hooks/useLoading';

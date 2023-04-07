@@ -1,11 +1,11 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {LoginScreen} from '../../screens/Login';
-import {CreateWalletScreen} from '../../screens/CreateWallet';
+import {LoginScreen} from '../screens/Login';
+import {CreateWalletScreen} from '../screens/CreateWallet';
 import {BottomTabNavigator} from './bottomTab';
-import {useAccountState} from '../../context/account.provider';
-import {RestoreWalletScreen} from '../../screens/RestoreWallet';
+import {useAccountState} from '../context/account.provider';
+import {RestoreWalletScreen} from '../screens/RestoreWallet';
 
 export type RootStackParamList = {
   Login: undefined;

@@ -7,7 +7,7 @@ import {Button} from '../components/button';
 import {SafeArea} from '../components/safeArea';
 import * as secureStore from '../libs/secureStore';
 import {useAccountState} from '../context/account.provider';
-import {RootStackParamList} from '../libs/navigation';
+import {RootStackParamList} from '../navigation';
 import StarterAnimation from '../../assets/starter-animation.json';
 
 type Props = {

@@ -5,7 +5,7 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {SafeArea} from '../components/safeArea';
 import {useAccountState} from '../context/account.provider';
 import {CurrencyBalance} from '../components/currencyBalance';
-import {BottomTabParamList} from '../libs/navigation/bottomTab';
+import {BottomTabParamList} from '../navigation/bottomTab';
 import {BLUE} from '../utils/colors';
 
 type Props = {

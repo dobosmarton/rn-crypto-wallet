@@ -8,7 +8,7 @@ import {Button} from '../components/button';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {Chip} from '../components/chip';
 import {useAccountState} from '../context/account.provider';
-import {RootStackParamList} from '../libs/navigation';
+import {RootStackParamList} from '../navigation';
 import {useLoading} from '../hooks/useLoading';
 import {CreatePasswordSheet} from '../components/actionSheets/createPasswordSheet';
 
