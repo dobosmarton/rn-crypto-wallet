@@ -62,11 +62,7 @@ const entropyToWords = async (
   const bits = entropyBits + checksum;
   const chunks = bits.match(/(.{1,11})/g);
 
-  const words = (chunks ?? []).map(
-    (binary: string) => wordlist[parseInt(binary, 2)],
-  );
-
-  return words;
+  return (chunks ?? []).map(binary => wordlist[parseInt(binary, 2)]);
 };
 
 export const wordsToSeedHex = async (

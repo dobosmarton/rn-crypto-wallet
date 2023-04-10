@@ -8,7 +8,7 @@ type UseLoading = () => {
 export const useLoading: UseLoading = () => {
   const [isLoading, setLoading] = useState(false);
 
-  const withLoading = async <T>(fn: () => Promise<T>) => {
+  const withLoading = async <T>(fn: () => Promise<T>): Promise<T> => {
     try {
       setLoading(true);
 

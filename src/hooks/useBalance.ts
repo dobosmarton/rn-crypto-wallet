@@ -10,7 +10,6 @@ type UseBalance = (props: {account: Account | null}) => {
 
 export const useBalance: UseBalance = ({account}) => {
   const [balance, setBalance] = useState<string | null>(null);
-  //const [isLoading, setLoading] = useState(false);
   const {isLoading, withLoading} = useLoading();
 
   const getBalance = () =>

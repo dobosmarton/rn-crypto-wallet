@@ -42,44 +42,46 @@ export const BottomTabBar: React.FunctionComponent<BottomTabBarProps> = ({
     transform: [{translateX: offset.value}],
   }));
 
+  const tabItems = state.routes.map((route, index) => {
+    const {options} = descriptors[route.key];
+
+    const isFocused = state.index === index;
+
+    const icon = tabBarIcon(route.name, isFocused);
+
+    const onPress = () => {
+      offset.value = withTiming(index * 94);
+      const event = navigation.emit({
+        type: 'tabPress',
+        target: route.key,
+        canPreventDefault: true,
+      });
+
+      if (!isFocused && !event.defaultPrevented) {
+        // The `merge: true` option makes sure that the params inside the tab screen are preserved
+        navigation.navigate(route.name, {merge: true});
+      }
+    };
+
+    return (
+      <TouchableOpacity
+        key={route.key}
+        style={styles.touchableContainer}
+        accessibilityRole="button"
+        accessibilityState={isFocused ? {selected: true} : {}}
+        accessibilityLabel={options.tabBarAccessibilityLabel}
+        testID={options.tabBarTestID}
+        onPress={onPress}>
+        <View style={[styles.tabItem]}>{icon}</View>
+      </TouchableOpacity>
+    );
+  });
+
   return (
     <View style={[styles.container, {paddingBottom: insets.bottom}]}>
       <View style={styles.tabBarContainer}>
         <Animated.View style={[styles.activeBackground, animatedStyles]} />
-        {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
-
-          const isFocused = state.index === index;
-
-          const icon = tabBarIcon(route.name, isFocused);
-
-          const onPress = () => {
-            offset.value = withTiming(index * 94);
-            const event = navigation.emit({
-              type: 'tabPress',
-              target: route.key,
-              canPreventDefault: true,
-            });
-
-            if (!isFocused && !event.defaultPrevented) {
-              // The `merge: true` option makes sure that the params inside the tab screen are preserved
-              navigation.navigate(route.name, {merge: true});
-            }
-          };
-
-          return (
-            <TouchableOpacity
-              key={route.key}
-              style={styles.touchableContainer}
-              accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
-              accessibilityLabel={options.tabBarAccessibilityLabel}
-              testID={options.tabBarTestID}
-              onPress={onPress}>
-              <View style={[styles.tabItem]}>{icon}</View>
-            </TouchableOpacity>
-          );
-        })}
+        {tabItems}
       </View>
     </View>
   );

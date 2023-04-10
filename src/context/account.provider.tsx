@@ -34,11 +34,8 @@ export const AccountProvider = ({
   const [account, setAccount] = useState<Account | null>(null);
   const {balance, isLoading: isBalanceLoading} = useBalance({account});
 
-  const loadWallet = (privateKey: string) => {
-    const _account = ethLib.privateKeyToAccount(privateKey);
-
-    setAccount(_account);
-  };
+  const loadWallet = (privateKey: string) =>
+    setAccount(ethLib.privateKeyToAccount(privateKey));
 
   const signOut = async () => {
     setAccount(null);

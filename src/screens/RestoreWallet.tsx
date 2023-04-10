@@ -21,7 +21,7 @@ type WordListState = {
   activeIndex: number | null;
 };
 
-const RECOVER_WORD_COUNT = 12;
+const RECOVERY_WORD_COUNT = 12;
 
 export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
   navigation,
@@ -82,7 +82,7 @@ export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
         </Text>
 
         <View style={styles.wordContainer}>
-          {new Array(RECOVER_WORD_COUNT).fill(0).map((_, index) => {
+          {new Array(RECOVERY_WORD_COUNT).fill(0).map((_, index) => {
             return (
               <View key={index} style={styles.wordItem}>
                 <Input
@@ -100,7 +100,9 @@ export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <Button disabled={wordList.length < 12} onPress={onContinue}>
+        <Button
+          disabled={wordList.length < RECOVERY_WORD_COUNT}
+          onPress={onContinue}>
           Continue
         </Button>
       </View>
