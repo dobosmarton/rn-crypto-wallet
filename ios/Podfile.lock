@@ -337,6 +337,8 @@ PODS:
     - React-Core
   - react-native-fast-crypto (2.2.0):
     - React
+  - react-native-pager-view (6.1.0-rc.2):
+    - React-Core
   - react-native-safe-area-context (4.5.0):
     - RCT-Folly
     - RCTRequired
@@ -523,6 +525,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - "react-native-blur (from `../node_modules/@react-native-community/blur`)"
   - react-native-fast-crypto (from `../node_modules/react-native-fast-crypto`)
+  - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -613,6 +616,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/blur"
   react-native-fast-crypto:
     :path: "../node_modules/react-native-fast-crypto"
+  react-native-pager-view:
+    :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-perflogger:
@@ -698,6 +703,7 @@ SPEC CHECKSUMS:
   React-logger: 94ec392ae471683635e4bf874d4e82f675399d2d
   react-native-blur: 50c9feabacbc5f49b61337ebc32192c6be7ec3c3
   react-native-fast-crypto: 5943c42466b86ad70be60d3a5f64bd22251e5d9e
+  react-native-pager-view: 037b3949788e38cb5ddfb44b854012804e803655
   react-native-safe-area-context: 39c2d8be3328df5d437ac1700f4f3a4f75716acc
   React-perflogger: 883a55a9a899535eaf06d0029108ef9ef22cce92
   React-RCTActionSheet: 1a3b8416688a3d291367be645022886f71d6842a

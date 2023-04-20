@@ -6,11 +6,19 @@ import React, {
 } from 'react';
 import {Account} from 'web3-core';
 import * as ethLib from '../libs/ethereum';
+import * as polygonLib from '../libs/polygon';
 import * as secureStore from '../libs/secureStore';
 import {useBalance} from '../hooks/useBalance';
 
+type ExtendedAccount = Account & {
+  balance: string | null;
+  balanceText: string;
+  isLoading: boolean;
+};
+
 export interface AccountContext {
   account: Account | null;
+  accounts: {[key: string]: ExtendedAccount};
   balance: string | null;
   isBalanceLoading: boolean;
   loadWallet: (privateKey: string) => void;
@@ -31,21 +39,46 @@ export type AccountProviderProps = {
 export const AccountProvider = ({
   children,
 }: PropsWithChildren<AccountProviderProps>) => {
-  const [account, setAccount] = useState<Account | null>(null);
-  const {balance, isLoading: isBalanceLoading} = useBalance({account});
+  const [ethAccount, setEthAccount] = useState<Account | null>(null);
+  const [polygonAccount, setPolygonAccount] = useState<Account | null>(null);
+  const ethBalance = useBalance({
+    account: ethAccount,
+    currencyPostfix: 'ETH',
+    getBalance: ethLib.getBalance,
+  });
+  const polygonBalance = useBalance({
+    account: polygonAccount,
+    currencyPostfix: 'MATIC',
+    getBalance: polygonLib.getBalance,
+  });
 
-  const loadWallet = (privateKey: string) =>
-    setAccount(ethLib.privateKeyToAccount(privateKey));
+  const loadWallet = (privateKey: string) => {
+    setEthAccount(ethLib.privateKeyToAccount(privateKey));
+    setPolygonAccount(polygonLib.privateKeyToAccount(privateKey));
+  };
 
   const signOut = async () => {
-    setAccount(null);
+    setEthAccount(null);
+    setPolygonAccount(null);
     return secureStore.resetData();
   };
 
+  const getAccounts = () => {
+    const accounts: {[key: string]: ExtendedAccount} = {};
+    if (ethAccount) {
+      accounts.ethereum = {...ethAccount, ...ethBalance};
+    }
+    if (polygonAccount) {
+      accounts.polygon = {...polygonAccount, ...polygonBalance};
+    }
+    return accounts;
+  };
+
   const state: AccountContext = {
-    account,
-    balance,
-    isBalanceLoading,
+    account: ethAccount,
+    balance: ethBalance.balance,
+    isBalanceLoading: ethBalance.isLoading,
+    accounts: getAccounts(),
     loadWallet,
     signOut,
   };

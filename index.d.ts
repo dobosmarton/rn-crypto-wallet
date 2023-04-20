@@ -19,6 +19,7 @@ declare module '*.svg' {
 
 declare module '@env' {
   export const ETHEREUM_ENDPOINT: string;
+  export const POLYGON_ENDPOINT: string;
 
   // other ones
 }

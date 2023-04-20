@@ -1,14 +1,22 @@
 import {useEffect, useState} from 'react';
 import {Account} from 'web3-core';
-import * as ethLib from '../libs/ethereum';
 import {useLoading} from './useLoading';
 
-type UseBalance = (props: {account: Account | null}) => {
+type UseBalance = (props: {
+  account: Account | null;
+  currencyPostfix: string;
+  getBalance: (address: string) => Promise<string>;
+}) => {
   balance: string | null;
+  balanceText: string;
   isLoading: boolean;
 };
 
-export const useBalance: UseBalance = ({account}) => {
+export const useBalance: UseBalance = ({
+  account,
+  currencyPostfix,
+  getBalance: getCurrencyBalance,
+}) => {
   const [balance, setBalance] = useState<string | null>(null);
   const {isLoading, withLoading} = useLoading();
 
@@ -17,7 +25,7 @@ export const useBalance: UseBalance = ({account}) => {
       if (!account) {
         return null;
       }
-      return ethLib.getBalance(account.address);
+      return getCurrencyBalance(account.address);
     });
 
   useEffect(() => {
@@ -33,5 +41,6 @@ export const useBalance: UseBalance = ({account}) => {
   return {
     isLoading,
     balance,
+    balanceText: `${balance ?? 'NaN'} ${currencyPostfix}`,
   };
 };

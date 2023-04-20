@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {BLUE} from '../utils/colors';
+import {GREEN, WHITE} from '../utils/colors';
 
 type Props = {
   name: string;
@@ -21,19 +21,17 @@ export const CurrencyBalance: React.FunctionComponent<Props> = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 12,
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
     gap: 8,
   },
   balance: {
     fontSize: 40,
     fontWeight: '900',
-    color: BLUE,
+    color: GREEN,
   },
   name: {
     fontSize: 24,
     fontWeight: '400',
+    color: WHITE,
   },
 });
