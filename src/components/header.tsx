@@ -4,7 +4,7 @@ import {Button} from './button';
 import ChevronLeft from '../../assets/icons/chevron-left.svg';
 import {BLUE} from '../utils/colors';
 
-type HeaderTypes = 'primary' | 'secondary';
+type HeaderTypes = 'primary' | 'secondary' | 'tertiary';
 
 type Props = {
   title: string;
@@ -16,6 +16,8 @@ const getStyle = (type: HeaderTypes) => {
   switch (type) {
     case 'secondary':
       return secondaryStyles;
+    case 'tertiary':
+      return tertiaryStyles;
     case 'primary':
     default:
       return primaryStyles;
@@ -70,6 +72,18 @@ const primaryStyles = StyleSheet.create({
 const secondaryStyles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '900',
+  },
+});
+
+const tertiaryStyles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingHorizontal: 16,
   },
   title: {

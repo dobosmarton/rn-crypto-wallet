@@ -9,6 +9,7 @@ type Props = {
   currency: {
     name: string;
     balance: string;
+    postfix: string;
   };
   onReceive: () => void;
   onSend: () => void;
@@ -21,7 +22,11 @@ export const CurrencyCard: React.FunctionComponent<Props> = ({
 }) => {
   return (
     <View style={styles.currencyCard}>
-      <CurrencyBalance name={currency.name} balance={currency.balance} />
+      <CurrencyBalance
+        name={currency.name}
+        balance={currency.balance}
+        postfix={currency.postfix}
+      />
       <View style={styles.actionPanel}>
         <Pressable style={styles.iconButtonContainer} onPress={onReceive}>
           <View style={styles.iconButton}>
