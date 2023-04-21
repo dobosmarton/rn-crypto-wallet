@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 
 import * as mnemonic from '../libs/mnemonics';
-import * as secureStore from '../libs/secureStore';
 
 type UseRecoveryWords = () => {
   randomWords: string[];
@@ -23,16 +22,8 @@ export const useRecoveryWords: UseRecoveryWords = () => {
   const generateSeed = async (
     password: string,
     words: string[] = randomWords,
-  ): Promise<string | undefined> => {
-    try {
-      const seedHex = await mnemonic.wordsToSeedHex(words.join(' '), password);
-      await secureStore.saveData('private-key', seedHex);
-
-      return seedHex;
-    } catch (error) {
-      console.log('generateSeed#error', (error as Error).message);
-    }
-  };
+  ): Promise<string | undefined> =>
+    mnemonic.wordsToSeedHex(words.join(' '), password);
 
   useEffect(() => {
     // generate words after the mount

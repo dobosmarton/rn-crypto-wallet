@@ -9,14 +9,14 @@ import {ethLib} from '../libs/ethereum';
 import {polygonLib} from '../libs/polygon';
 import * as secureStore from '../libs/secureStore';
 import {useBalance} from '../hooks/useBalance';
-import {CurrencyInstance} from '../libs/currency';
+import {Web3Instance} from '../libs/web3';
 
 export type ExtendedAccount = Account & {
   balance: string | null;
   balanceText: string;
   currencyPostfix: string;
   isLoading: boolean;
-  instance: CurrencyInstance;
+  instance: Web3Instance;
 };
 
 export enum CurrencyKeys {
@@ -29,7 +29,7 @@ export interface AccountContext {
   accounts: {[key in CurrencyKeys]?: ExtendedAccount};
   balance: string | null;
   isBalanceLoading: boolean;
-  loadWallet: (privateKey: string) => void;
+  loadWallet: (privateKey: string | null) => void;
   signOut: () => Promise<boolean>;
 }
 
@@ -60,9 +60,11 @@ export const AccountProvider = ({
     getBalance: polygonLib.getBalance,
   });
 
-  const loadWallet = (privateKey: string) => {
-    setEthAccount(ethLib.privateKeyToAccount(privateKey));
-    setPolygonAccount(polygonLib.privateKeyToAccount(privateKey));
+  const loadWallet = (privateKey: string | null) => {
+    if (privateKey) {
+      setEthAccount(ethLib.privateKeyToAccount(privateKey));
+      setPolygonAccount(polygonLib.privateKeyToAccount(privateKey));
+    }
   };
 
   const signOut = async () => {
