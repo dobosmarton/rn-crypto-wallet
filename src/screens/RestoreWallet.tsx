@@ -11,6 +11,7 @@ import {WordListSheet} from '../components/actionSheets/wordListSheet';
 import {Input} from '../components/input';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {useAccountState} from '../context/account.provider';
+import {generatePrivateKey} from '../libs/hdkey';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'RestoreWallet'>;
@@ -53,11 +54,12 @@ export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
   const onRestoreWallet = (password: string) =>
     withLoading(async () => {
       try {
-        const key = await generateSeed(password, wordList);
+        const seed = await generateSeed(password, wordList);
 
-        if (key !== undefined) {
+        if (seed !== undefined) {
+          const keys = await generatePrivateKey(seed);
+          loadWallet(keys);
           setPasswordModalOpen(false);
-          loadWallet(key);
         }
       } catch (error) {
         console.log('onRestoreWallet#error', (error as Error).message);
@@ -68,7 +70,7 @@ export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
     <SafeArea>
       <Header
         title="Restore Wallet"
-        type="secondary"
+        type="tertiary"
         onBack={() => navigation.goBack()}
       />
 

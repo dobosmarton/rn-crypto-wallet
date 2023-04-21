@@ -3,7 +3,7 @@ import {Buffer} from 'buffer';
 import {deriveHdPrivateNodeFromSeed} from '@bitauth/libauth';
 import * as secureStore from '../secureStore';
 
-export const generateKeyPair = async (seed: string) => {
+export const generatePrivateKey = async (seed: string) => {
   const res = deriveHdPrivateNodeFromSeed(
     {
       sha512: {

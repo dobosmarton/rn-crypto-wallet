@@ -16,7 +16,7 @@ type Props = {
 
 type CurrencyState = {
   currencyKey: CurrencyKeys | null;
-  name: string;
+  postfix: string;
   isSendOpen: boolean;
   isReceiveOpen: boolean;
 };
@@ -27,15 +27,15 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
   const [selectedCurrencyState, setSelectedCurrencyState] =
     useState<CurrencyState>({
       currencyKey: null,
-      name: '',
+      postfix: '',
       isReceiveOpen: false,
       isSendOpen: false,
     });
 
   const data = (Object.keys(accounts) as CurrencyKeys[]).map(acc => ({
     name: acc,
-    currencyName: accounts[acc]?.currencyPostfix ?? '',
-    balance: accounts[acc]?.balanceText ?? '',
+    postfix: accounts[acc]?.currencyPostfix ?? '',
+    balance: accounts[acc]?.balance ?? '',
   }));
 
   return (
@@ -52,7 +52,7 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
                   currency={currency}
                   onReceive={() =>
                     setSelectedCurrencyState({
-                      name: currency.currencyName,
+                      postfix: currency.postfix,
                       currencyKey: currency.name,
                       isSendOpen: false,
                       isReceiveOpen: true,
@@ -60,7 +60,7 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
                   }
                   onSend={() =>
                     setSelectedCurrencyState({
-                      name: currency.currencyName,
+                      postfix: currency.postfix,
                       currencyKey: currency.name,
                       isSendOpen: true,
                       isReceiveOpen: false,
@@ -74,13 +74,12 @@ export const HomeScreen: React.FunctionComponent<Props> = ({}) => {
       </View>
 
       <SendCurrencySheet
-        currencyName={selectedCurrencyState.name}
+        currencyName={selectedCurrencyState.postfix}
         currencyKey={selectedCurrencyState.currencyKey}
         isVisible={!!selectedCurrencyState?.isSendOpen}
         setVisible={isVisilbe =>
           setSelectedCurrencyState(state => ({...state, isSendOpen: isVisilbe}))
         }
-        onContinue={async () => {}}
       />
     </SafeArea>
   );

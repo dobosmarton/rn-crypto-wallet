@@ -11,6 +11,7 @@ import {useAccountState} from '../context/account.provider';
 import {RootStackParamList} from '../navigation';
 import {useLoading} from '../hooks/useLoading';
 import {CreatePasswordSheet} from '../components/actionSheets/createPasswordSheet';
+import {generatePrivateKey} from '../libs/hdkey';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateWallet'>;
@@ -32,9 +33,11 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
   const onCreateWallet = (password: string) =>
     withLoading(async () => {
       try {
-        const key = await generateSeed(password);
+        const seed = await generateSeed(password);
 
-        if (key !== undefined) {
+        if (seed !== undefined) {
+          const key = await generatePrivateKey(seed);
+
           setPasswordModalOpen(false);
           loadWallet(key);
         }
@@ -47,7 +50,7 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
     <SafeArea>
       <Header
         title="Create Wallet"
-        type="secondary"
+        type="tertiary"
         onBack={() => navigation.goBack()}
       />
 
