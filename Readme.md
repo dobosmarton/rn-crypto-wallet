@@ -26,19 +26,21 @@ Please follow the steps below to generate the necessary keys for the environment
 
 ```
 ETHEREUM_ENDPOINT=
+POLYGON_ENDPOINT=
 ```
 
 3. To generate the endpoint, use [Infura](https://docs.infura.io/infura/getting-started)
-4. Replace the `ETHEREUM_ENDPOINT` value in the `.env` file with the key that you generated.
+4. Replace the `ETHEREUM_ENDPOINT` and `POLYGON_ENDPOINT` value in the `.env` file with the key that you generated.
 
 Note: Do not share your API key with others or commit it to any public repository. Keep it safe and secure.
 
 ## Features
 
 - Create Wallet based on Mnemonics and custom password
-- View Ethereum balance
+- View Ethereum and Polygon balances
 - View and copy address and private key
 - Restore account based on Mnemonics and password
+- Send transactions to another addresses
 
 ## Demo
 
