@@ -5,20 +5,28 @@ import React, {
   useState,
 } from 'react';
 import {Account} from 'web3-core';
-import * as ethLib from '../libs/ethereum';
-import * as polygonLib from '../libs/polygon';
+import {ethLib} from '../libs/ethereum';
+import {polygonLib} from '../libs/polygon';
 import * as secureStore from '../libs/secureStore';
 import {useBalance} from '../hooks/useBalance';
+import {CurrencyInstance} from '../libs/currency';
 
-type ExtendedAccount = Account & {
+export type ExtendedAccount = Account & {
   balance: string | null;
   balanceText: string;
+  currencyPostfix: string;
   isLoading: boolean;
+  instance: CurrencyInstance;
 };
+
+export enum CurrencyKeys {
+  ethereum = 'ethereum',
+  polygon = 'polygon',
+}
 
 export interface AccountContext {
   account: Account | null;
-  accounts: {[key: string]: ExtendedAccount};
+  accounts: {[key in CurrencyKeys]?: ExtendedAccount};
   balance: string | null;
   isBalanceLoading: boolean;
   loadWallet: (privateKey: string) => void;
@@ -64,12 +72,20 @@ export const AccountProvider = ({
   };
 
   const getAccounts = () => {
-    const accounts: {[key: string]: ExtendedAccount} = {};
+    const accounts: {[key in CurrencyKeys]?: ExtendedAccount} = {};
     if (ethAccount) {
-      accounts.ethereum = {...ethAccount, ...ethBalance};
+      accounts[CurrencyKeys.ethereum] = {
+        ...ethAccount,
+        ...ethBalance,
+        instance: ethLib,
+      };
     }
     if (polygonAccount) {
-      accounts.polygon = {...polygonAccount, ...polygonBalance};
+      accounts[CurrencyKeys.polygon] = {
+        ...polygonAccount,
+        ...polygonBalance,
+        instance: polygonLib,
+      };
     }
     return accounts;
   };

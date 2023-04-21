@@ -2,7 +2,7 @@ import React from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 
 type Props = {
-  data: {name: string}[];
+  dataLength: number;
   scrollOffsetAnimatedValue: Animated.Value;
   positionAnimatedValue: Animated.Value;
 };
@@ -10,17 +10,17 @@ type Props = {
 const DOT_SIZE = 40;
 
 export const Pagination: React.FunctionComponent<Props> = ({
-  data,
+  dataLength,
   scrollOffsetAnimatedValue,
   positionAnimatedValue,
 }) => {
-  const inputRange = [0, data.length];
+  const inputRange = [0, dataLength];
   const translateX = Animated.add(
     scrollOffsetAnimatedValue,
     positionAnimatedValue,
   ).interpolate({
     inputRange,
-    outputRange: [0, data.length * DOT_SIZE],
+    outputRange: [0, dataLength * DOT_SIZE],
   });
 
   return (
@@ -33,13 +33,11 @@ export const Pagination: React.FunctionComponent<Props> = ({
           },
         ]}
       />
-      {data.map(item => {
-        return (
-          <View key={item.name} style={styles.paginationDotContainer}>
-            <View style={styles.paginationDot} />
-          </View>
-        );
-      })}
+      {new Array(dataLength).fill(0).map((_, index) => (
+        <View key={index} style={styles.paginationDotContainer}>
+          <View style={styles.paginationDot} />
+        </View>
+      ))}
     </View>
   );
 };

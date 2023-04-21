@@ -14,6 +14,7 @@ type Props = Pick<
   TextInputProps,
   | 'value'
   | 'editable'
+  | 'keyboardType'
   | 'selectTextOnFocus'
   | 'placeholder'
   | 'secureTextEntry'
@@ -22,6 +23,7 @@ type Props = Pick<
   | 'onPressIn'
 > & {
   errorMessage?: string;
+  postfix?: string;
   onChange?: (text: string) => void;
 };
 
@@ -31,9 +33,11 @@ export const Input: React.FunctionComponent<Props> = ({
   secureTextEntry,
   errorMessage,
   editable,
+  keyboardType,
   selectTextOnFocus,
   autoCapitalize,
   autoFocus,
+  postfix,
   onPressIn,
   onChange,
 }) => {
@@ -47,6 +51,7 @@ export const Input: React.FunctionComponent<Props> = ({
           style={styles.input}
           value={value}
           editable={editable}
+          keyboardType={keyboardType}
           selectTextOnFocus={selectTextOnFocus}
           secureTextEntry={secureTextEntry}
           placeholder={placeholder}
@@ -62,6 +67,7 @@ export const Input: React.FunctionComponent<Props> = ({
             <CloseIcon width={20} height={20} color={BLUE} />
           </TouchableOpacity>
         )}
+        {postfix ? <Text style={styles.postfix}>{postfix}</Text> : null}
       </View>
       {errorMessage ? (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -79,6 +85,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#474E68',
     flexDirection: 'row',
+    alignItems: 'center',
   },
   errorContainer: {
     borderColor: '#E63E6D',
@@ -89,5 +96,9 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: '#E63E6D',
+  },
+  postfix: {
+    color: '#474E68',
+    fontSize: 14,
   },
 });

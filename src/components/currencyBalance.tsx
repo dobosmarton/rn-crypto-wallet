@@ -22,7 +22,7 @@ export const CurrencyBalance: React.FunctionComponent<Props> = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    gap: 8,
+    gap: 2,
   },
   balance: {
     fontSize: 40,

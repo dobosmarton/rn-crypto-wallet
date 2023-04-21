@@ -1,17 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import _ from 'react';
 import Web3 from 'web3';
-import {Account} from 'web3-core';
 import {ETHEREUM_ENDPOINT} from '@env';
+import {currencyBuilder} from '../currency';
 
 const Web3Instance = new Web3(
   new Web3.providers.HttpProvider(ETHEREUM_ENDPOINT),
 );
 
-export const privateKeyToAccount = (privateKey: string): Account =>
-  Web3Instance.eth.accounts.privateKeyToAccount(privateKey, true);
-
-export const getBalance = async (address: string): Promise<string> => {
-  const balance = await Web3Instance.eth.getBalance(address);
-  return Web3Instance.utils.fromWei(balance, 'ether');
-};
+export const ethLib = currencyBuilder(Web3Instance);

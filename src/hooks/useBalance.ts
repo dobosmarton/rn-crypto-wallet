@@ -10,6 +10,7 @@ type UseBalance = (props: {
   balance: string | null;
   balanceText: string;
   isLoading: boolean;
+  currencyPostfix: string;
 };
 
 export const useBalance: UseBalance = ({
@@ -42,5 +43,6 @@ export const useBalance: UseBalance = ({
     isLoading,
     balance,
     balanceText: `${balance ?? 'NaN'} ${currencyPostfix}`,
+    currencyPostfix,
   };
 };
