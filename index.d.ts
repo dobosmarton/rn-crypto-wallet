@@ -20,6 +20,10 @@ declare module '*.svg' {
 declare module '@env' {
   export const ETHEREUM_ENDPOINT: string;
   export const POLYGON_ENDPOINT: string;
+  export const POLYGON_SCAN_BASE_API: string;
+  export const POLYGON_SCAN_KEY: string;
+  export const ETHEREUM_SCAN_BASE_API: string;
+  export const ETHEREUM_SCAN_KEY: string;
 
   // other ones
 }
