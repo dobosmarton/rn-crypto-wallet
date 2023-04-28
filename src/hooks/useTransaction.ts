@@ -6,7 +6,7 @@ import {useLoading} from './useLoading';
 
 type UseTransaction = (props: {
   account: Account | null;
-  web3Instance: Web3Instance | null;
+  web3Instance?: Web3Instance;
 }) => {
   isLoading: boolean;
   estimatedGasPrice: string | null;

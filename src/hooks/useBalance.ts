@@ -1,48 +1,42 @@
 import {useEffect, useState} from 'react';
-import {Account} from 'web3-core';
 import {useLoading} from './useLoading';
+import {CurrencyTypes, useConfig} from './useConfig';
 
-type UseBalance = (props: {
-  account: Account | null;
-  currencyPostfix: string;
-  getBalance: (address: string) => Promise<string>;
-}) => {
+type UseBalance = (
+  address: string | undefined,
+  type: CurrencyTypes,
+) => {
   balance: string | null;
   balanceText: string;
   isLoading: boolean;
-  currencyPostfix: string;
 };
 
-export const useBalance: UseBalance = ({
-  account,
-  currencyPostfix,
-  getBalance: getCurrencyBalance,
-}) => {
+export const useBalance: UseBalance = (address, type) => {
   const [balance, setBalance] = useState<string | null>(null);
   const {isLoading, withLoading} = useLoading();
+  const {lib, currencyPostfix} = useConfig(type);
 
   const getBalance = () =>
     withLoading(async (): Promise<null | string> => {
-      if (!account) {
+      if (!address || !lib) {
         return null;
       }
-      return getCurrencyBalance(account.address);
+      return lib.getBalance(address);
     });
 
   useEffect(() => {
-    if (!account) {
+    if (!address) {
       setBalance(null);
     } else {
       getBalance().then(setBalance);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account]);
+  }, [address]);
 
   return {
     isLoading,
     balance,
     balanceText: `${balance ?? 'NaN'} ${currencyPostfix}`,
-    currencyPostfix,
   };
 };
