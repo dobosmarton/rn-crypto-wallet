@@ -10,8 +10,8 @@ import {useLoading} from '../hooks/useLoading';
 import {WordListSheet} from '../components/actionSheets/wordListSheet';
 import {Input} from '../components/input';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
-import {useAccountState} from '../context/account.provider';
 import {generatePrivateKey} from '../libs/hdkey';
+import {useAccountState} from '../hooks/useAccountState';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'RestoreWallet'>;

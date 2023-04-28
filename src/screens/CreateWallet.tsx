@@ -7,11 +7,11 @@ import {Header} from '../components/header';
 import {Button} from '../components/button';
 import {useRecoveryWords} from '../hooks/useRecoveryWords';
 import {Chip} from '../components/chip';
-import {useAccountState} from '../context/account.provider';
 import {RootStackParamList} from '../navigation';
 import {useLoading} from '../hooks/useLoading';
 import {CreatePasswordSheet} from '../components/actionSheets/createPasswordSheet';
 import {generatePrivateKey} from '../libs/hdkey';
+import {useAccountState} from '../hooks/useAccountState';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'CreateWallet'>;

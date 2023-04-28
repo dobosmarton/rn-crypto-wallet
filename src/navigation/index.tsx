@@ -4,8 +4,8 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {LoginScreen} from '../screens/Login';
 import {CreateWalletScreen} from '../screens/CreateWallet';
 import {BottomTabNavigator} from './bottomTab';
-import {useAccountState} from '../context/account.provider';
 import {RestoreWalletScreen} from '../screens/RestoreWallet';
+import {useAccountState} from '../hooks/useAccountState';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -17,13 +17,14 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const NavigationRoot: React.FunctionComponent = () => {
-  const {account} = useAccountState();
+  const {hasAccount} = useAccountState();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{headerShown: false}}>
-        {!account ? (
+        {!hasAccount() ? (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="CreateWallet" component={CreateWalletScreen} />

@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {
+  StyleProp,
   StyleSheet,
   Text,
   TextInput,
   TextInputProps,
   TouchableOpacity,
   View,
+  ViewStyle,
 } from 'react-native';
 import CloseIcon from '../../assets/icons/close.svg';
 import {BLUE} from '../utils/colors';
@@ -21,9 +23,12 @@ type Props = Pick<
   | 'autoCapitalize'
   | 'autoFocus'
   | 'onPressIn'
+  | 'multiline'
+  | 'numberOfLines'
 > & {
   errorMessage?: string;
   postfix?: string;
+  style?: StyleProp<ViewStyle>;
   onChange?: (text: string) => void;
 };
 
@@ -38,6 +43,9 @@ export const Input: React.FunctionComponent<Props> = ({
   autoCapitalize,
   autoFocus,
   postfix,
+  numberOfLines,
+  multiline,
+  style,
   onPressIn,
   onChange,
 }) => {
@@ -46,7 +54,11 @@ export const Input: React.FunctionComponent<Props> = ({
   return (
     <>
       <View
-        style={[styles.container, errorMessage ? styles.errorContainer : {}]}>
+        style={[
+          styles.container,
+          errorMessage ? styles.errorContainer : {},
+          style,
+        ]}>
         <TextInput
           style={styles.input}
           value={value}
@@ -60,7 +72,9 @@ export const Input: React.FunctionComponent<Props> = ({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           autoCapitalize={autoCapitalize}
+          numberOfLines={numberOfLines}
           autoFocus={autoFocus}
+          multiline={multiline}
         />
         {!isFocused && !!value && editable && (
           <TouchableOpacity onPress={() => onChange?.('')}>

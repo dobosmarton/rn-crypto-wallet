@@ -3,9 +3,11 @@ import {
   ActivityIndicator,
   Pressable,
   PressableProps,
+  StyleProp,
   StyleSheet,
   Text,
   View,
+  ViewStyle,
 } from 'react-native';
 import {BLUE, GREEN} from '../utils/colors';
 
@@ -14,6 +16,7 @@ type ButtonTypes = 'primary' | 'secondary' | 'tertiary';
 type Props = Pick<PressableProps, 'disabled' | 'onPress' | 'hitSlop'> & {
   type?: ButtonTypes;
   isLoading?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
 const getStyle = (type: ButtonTypes) => {
@@ -34,6 +37,7 @@ export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
   onPress,
   disabled,
   hitSlop,
+  style,
   children,
 }) => {
   const styles = getStyle(type);
@@ -43,7 +47,12 @@ export const Button: React.FunctionComponent<PropsWithChildren<Props>> = ({
       hitSlop={hitSlop}
       disabled={disabled || isLoading}
       onPress={onPress}>
-      <View style={[styles.buttonContainer, disabled ? styles.disabled : {}]}>
+      <View
+        style={[
+          styles.buttonContainer,
+          disabled ? styles.disabled : {},
+          style,
+        ]}>
         {isLoading ? (
           <ActivityIndicator size={'small'} color={styles.buttonText.color} />
         ) : null}

@@ -1,30 +1,29 @@
 import React, {useEffect, useState} from 'react';
+import {Account} from 'web3-core';
 
 import {ActionSheet} from '../actionSheet';
 
-import {
-  CurrencyKeys,
-  ExtendedAccount,
-  useAccountState,
-} from '../../../context/account.provider';
 import {useTransaction} from '../../../hooks/useTransaction';
 import {Edit} from './edit';
 import {Review} from './review';
+import {CurrencyTypes, useConfig} from '../../../hooks/useConfig';
 
 type Props = {
-  currencyName: string;
-  currencyKey: CurrencyKeys | null;
+  account: Account | null;
+  currencyName?: string;
+  currencyKey: CurrencyTypes | null;
   isVisible: boolean;
   setVisible: (isVisible: boolean) => void;
 };
 
 export const SendCurrencySheet: React.FunctionComponent<Props> = ({
-  currencyName,
+  account,
   currencyKey,
+  currencyName,
   isVisible,
   setVisible,
 }) => {
-  const {accounts, account} = useAccountState();
+  const {lib} = useConfig(currencyKey);
   const [isReviewStep, setReviewStep] = useState(false);
 
   const {
@@ -39,10 +38,7 @@ export const SendCurrencySheet: React.FunctionComponent<Props> = ({
     sendTransaction,
   } = useTransaction({
     account,
-    web3Instance:
-      currencyKey && accounts[currencyKey]
-        ? (accounts[currencyKey] as ExtendedAccount).instance
-        : null,
+    web3Instance: lib,
   });
 
   const onReview = () => {

@@ -5,17 +5,18 @@ import {BottomTabParamList} from '../navigation/bottomTab';
 import {SafeArea} from '../components/safeArea';
 import {Header} from '../components/header';
 import ChevronRight from '../../assets/icons/chevron-right.svg';
-import {useAccountState} from '../context/account.provider';
 import {HiddenTextView} from '../components/textViews/hiddenTextView';
 import {CopyableText} from '../components/textViews/copyableText';
 import {WarningModal} from '../components/warningModal';
+import {useAccountState} from '../hooks/useAccountState';
+import {CurrencyTypes} from '../hooks/useConfig';
 
 type Props = {
   navigation: NativeStackNavigationProp<BottomTabParamList, 'Account'>;
 };
 
 export const AccountScreen: React.FunctionComponent<Props> = () => {
-  const {account, signOut} = useAccountState();
+  const {getStateSlice, resetAccount} = useAccountState();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const onSignOutButton = () => setModalOpen(true);
@@ -25,9 +26,11 @@ export const AccountScreen: React.FunctionComponent<Props> = () => {
     // conditional rendering in navigations
     // we have to wait the end of the modal closing animtaion
     setTimeout(() => {
-      return signOut();
+      return resetAccount();
     }, 300);
   };
+
+  const slice = getStateSlice(CurrencyTypes.ethereum);
 
   return (
     <>
@@ -35,9 +38,12 @@ export const AccountScreen: React.FunctionComponent<Props> = () => {
         <View style={styles.container}>
           <Header title="Account" type="primary" />
           <View style={styles.content}>
-            <CopyableText label="Address" text={account?.address} />
+            <CopyableText label="Address" text={slice.account?.address} />
 
-            <HiddenTextView text={account?.privateKey} label="Private key" />
+            <HiddenTextView
+              text={slice.account?.privateKey}
+              label="Private key"
+            />
 
             <Pressable style={styles.itemRow} onPress={onSignOutButton}>
               <Text style={styles.itemRowTitle}>Sign out</Text>

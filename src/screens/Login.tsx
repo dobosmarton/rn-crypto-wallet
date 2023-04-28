@@ -6,9 +6,9 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {Button} from '../components/button';
 import {SafeArea} from '../components/safeArea';
 import * as secureStore from '../libs/secureStore';
-import {useAccountState} from '../context/account.provider';
 import {RootStackParamList} from '../navigation';
 import StarterAnimation from '../../assets/starter-animation.json';
+import {useAccountState} from '../hooks/useAccountState';
 
 type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Login'>;

@@ -7,7 +7,7 @@ import {Header} from '../../header';
 
 type Props = {
   isLoading: boolean;
-  currencyName: string;
+  currencyName?: string;
   transactionAmount: string;
   transactionToAddress: string;
   addressErrorMessage: TransactionsErrorMessages | null;

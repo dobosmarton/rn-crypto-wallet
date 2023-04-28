@@ -6,26 +6,26 @@ import ArrowDownTray from '../../assets/icons/arrow-down-tray.svg';
 import PaperAirplane from '../../assets/icons/paper-airplane.svg';
 
 type Props = {
-  currency: {
-    name: string;
-    balance: string;
-    postfix: string;
-  };
+  name: string;
+  balance: string | null;
+  postfix?: string;
   onReceive: () => void;
   onSend: () => void;
 };
 
 export const CurrencyCard: React.FunctionComponent<Props> = ({
-  currency,
+  name,
+  balance,
+  postfix,
   onReceive,
   onSend,
 }) => {
   return (
     <View style={styles.currencyCard}>
       <CurrencyBalance
-        name={currency.name}
-        balance={currency.balance}
-        postfix={currency.postfix}
+        name={name}
+        balance={balance ?? ''}
+        postfix={postfix ?? ''}
       />
       <View style={styles.actionPanel}>
         <Pressable style={styles.iconButtonContainer} onPress={onReceive}>
