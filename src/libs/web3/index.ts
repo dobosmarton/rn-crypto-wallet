@@ -1,5 +1,11 @@
 import Web3 from 'web3';
-import {Account, TransactionConfig, TransactionReceipt} from 'web3-core';
+import {
+  Account,
+  TransactionConfig,
+  TransactionReceipt,
+  BlockNumber,
+} from 'web3-core';
+import {BlockTransactionObject, Transaction} from 'web3-eth';
 import {convertStringToNumSafely} from '../../utils/numbers';
 
 type TransactionProps = {
@@ -13,6 +19,12 @@ export type Web3Instance = {
   isValidAddress: (address: string) => boolean;
   privateKeyToAccount: (privateKey: string) => Account;
   getBalance: (address: string) => Promise<string>;
+  getLatestBlock: () => Promise<BlockTransactionObject>;
+  getBlock: (
+    blockHashOrBlockNumber: BlockNumber,
+  ) => Promise<BlockTransactionObject>;
+  getTransaction: (hash: string) => Promise<Transaction>;
+  getTransactionCount: (address: string) => Promise<number>;
   estimateGasPrice: (address: string, amount: string) => Promise<string | null>;
   sendTransaction: (
     props: TransactionProps,
@@ -45,6 +57,17 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
 
   const isValidAddress = (address: string) =>
     web3Instance.utils.isAddress(address);
+
+  const getLatestBlock = () => web3Instance.eth.getBlock('latest', true);
+
+  const getBlock = (blockHashOrBlockNumber: BlockNumber) =>
+    web3Instance.eth.getBlock(blockHashOrBlockNumber, true);
+
+  const getTransactionCount = (address: string) =>
+    web3Instance.eth.getTransactionCount(address);
+
+  const getTransaction = (transactionHash: string) =>
+    web3Instance.eth.getTransaction(transactionHash);
 
   const sendTransaction = async (
     props: TransactionProps,
@@ -90,6 +113,10 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
     privateKeyToAccount,
     getBalance,
     estimateGasPrice,
+    getTransactionCount,
+    getTransaction,
     sendTransaction,
+    getLatestBlock,
+    getBlock,
   };
 };
