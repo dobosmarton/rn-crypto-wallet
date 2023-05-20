@@ -16,7 +16,7 @@ type Props = {
   setVisible: (isVisible: boolean) => void;
 };
 
-export const SendCurrencySheet: React.FunctionComponent<Props> = ({
+export const TransactionSheet: React.FunctionComponent<Props> = ({
   account,
   currencyKey,
   currencyName,

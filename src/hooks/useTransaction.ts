@@ -37,6 +37,13 @@ export const useTransaction: UseTransaction = ({account, web3Instance}) => {
   const debouncedTransactionAmount = useDebounce(transactionAmount, 500);
   const debouncedTransactionToAddress = useDebounce(transactionToAddress, 500);
 
+  const addressErrorMessage =
+    !web3Instance ||
+    !debouncedTransactionToAddress ||
+    web3Instance.isValidAddress(debouncedTransactionToAddress)
+      ? null
+      : TransactionsErrorMessages.INVALID_RECEIVER_ADDRESS;
+
   const estimateGasPrice = (amount: string): Promise<string | null> =>
     withLoading(async () => {
       try {
@@ -64,13 +71,6 @@ export const useTransaction: UseTransaction = ({account, web3Instance}) => {
     setErrorMessage(null);
     setTransactionAmount(value);
   };
-
-  const getAddressErrorMessage = () =>
-    !web3Instance ||
-    !debouncedTransactionToAddress ||
-    web3Instance.isValidAddress(debouncedTransactionToAddress)
-      ? null
-      : TransactionsErrorMessages.INVALID_RECEIVER_ADDRESS;
 
   const sendTransaction = () =>
     withLoading(async () => {
@@ -106,7 +106,7 @@ export const useTransaction: UseTransaction = ({account, web3Instance}) => {
   return {
     isLoading,
     errorMessage,
-    addressErrorMessage: getAddressErrorMessage(),
+    addressErrorMessage,
     estimatedGasPrice,
     transactionAmount,
     setTransactionAmount: _setTransactionAmount,

@@ -99,12 +99,12 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
       props.privateKey,
     );
 
-    if (!signedTransaction) {
+    if (!signedTransaction.rawTransaction) {
       throw new Error('Transaction signature failed!');
     }
 
     return web3Instance.eth.sendSignedTransaction(
-      signedTransaction.rawTransaction as string,
+      signedTransaction.rawTransaction,
     );
   };
 

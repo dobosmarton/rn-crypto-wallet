@@ -48,7 +48,7 @@ export const useAccountState: UseAccountState = () => {
     },
   };
 
-  const getStateSlice = (key: CurrencyTypes) => {
+  const getStateSlice = (key: CurrencyTypes): Slice => {
     return state[key];
   };
 
@@ -64,7 +64,7 @@ export const useAccountState: UseAccountState = () => {
     polygonState.resetAccount();
   };
 
-  const hasAccount = () => {
+  const hasAccount = (): boolean => {
     return Object.keys(state).some(slice => state[slice].account);
   };
 
