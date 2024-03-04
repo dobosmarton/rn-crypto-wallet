@@ -16,7 +16,7 @@ export const useBalance: UseBalance = (address, type) => {
   const {isLoading, withLoading} = useLoading();
   const {lib, currencyPostfix} = useConfig(type);
 
-  const getBalance = () =>
+  const getBalance = async () =>
     withLoading(async (): Promise<null | string> => {
       if (!address || !lib) {
         return null;

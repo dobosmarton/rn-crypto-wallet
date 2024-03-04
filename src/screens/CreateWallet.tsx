@@ -30,7 +30,7 @@ export const CreateWalletScreen: React.FunctionComponent<Props> = ({
     setPasswordModalOpen(true);
   };
 
-  const onCreateWallet = (password: string) =>
+  const onCreateWallet = async (password: string) =>
     withLoading(async () => {
       try {
         const seed = await generateSeed(password);

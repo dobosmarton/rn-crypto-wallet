@@ -1,11 +1,11 @@
-import {Account} from 'web3-core';
+import {Web3Account} from 'web3-eth-accounts';
 import {useEthereumAccountState} from '../context/ethereum.provider';
 import {usePolygonAccountState} from '../context/polygon.provider';
 import {CurrencyTypes} from './useConfig';
 import {Transaction} from '../libs/scan';
 
 type Slice = {
-  account: Account | null;
+  account: Web3Account | null;
   balance: string | null;
   history: Transaction[];
   isBalanceLoading: boolean;

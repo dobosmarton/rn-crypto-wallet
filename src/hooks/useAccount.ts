@@ -1,16 +1,16 @@
 import {useState} from 'react';
-import {Account} from 'web3-core';
+import {Web3Account} from 'web3-eth-accounts';
 import {CurrencyTypes, useConfig} from './useConfig';
 
 export type UseAccount = (type: CurrencyTypes) => {
-  account: Account | null;
+  account: Web3Account | null;
   loadWallet: (privateKey: string | null) => void;
   resetAccount: () => void;
 };
 
 export const useAccount: UseAccount = type => {
   const {lib} = useConfig(type);
-  const [account, setAccount] = useState<Account | null>(null);
+  const [account, setAccount] = useState<Web3Account | null>(null);
 
   const loadWallet = (privateKey: string | null) => {
     if (privateKey && lib) {
