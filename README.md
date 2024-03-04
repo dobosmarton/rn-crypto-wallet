@@ -1,79 +1,57 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Simple crypto wallet app
 
-# Getting Started
+The wallet allows users to create ethereum address and use the app as a wallet of the address.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Getting Started
 
-## Step 1: Start the Metro Server
+To get started with the project, please follow the steps below:
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+1. Clone the repository onto your local machine.
+2. Install the dependencies by running `npm install`.
+3. Install iOS dependencies by running `cd ios && pod install && cd ...`
+4. Start the development server by running `npm start`.
+5. For running on Android device, run `npm run android`.
+6. For running on iOS device, run `npm run ios`.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+Note: You will need to have Xcode or Android Studio installed on your computer in order to run the app on your respective device.
 
-```bash
-# using npm
-npm start
+## Environment Variables
 
-# OR using Yarn
-yarn start
+The project utilizes environment variables that are stored in a `.env` file in the root directory of the project.
+
+Please follow the steps below to generate the necessary keys for the environment variables:
+
+1. Create a new `.env` file in the root directory of the project.
+2. Add the following keys to the `.env` file:
+
+```
+ETHEREUM_ENDPOINT=
+POLYGON_ENDPOINT=
 ```
 
-## Step 2: Start your Application
+3. To generate the endpoint, use [Infura](https://docs.infura.io/infura/getting-started)
+4. Replace the `ETHEREUM_ENDPOINT` and `POLYGON_ENDPOINT` value in the `.env` file with the key that you generated.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+Note: Do not share your API key with others or commit it to any public repository. Keep it safe and secure.
 
-### For Android
+## Features
 
-```bash
-# using npm
-npm run android
+- Create Wallet based on Mnemonics and custom password
+- View Ethereum and Polygon balances
+- View and copy address and private key
+- Restore account based on Mnemonics and password
+- Send transactions to another addresses
 
-# OR using Yarn
-yarn android
-```
+## Demo
 
-### For iOS
+### Creating a wallet
 
-```bash
-# using npm
-npm run ios
+https://user-images.githubusercontent.com/11165169/230159067-fbd92ad3-95de-4684-bf61-e49c10dae41c.mov
 
-# OR using Yarn
-yarn ios
-```
+### Restoring a wallet
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+https://user-images.githubusercontent.com/11165169/230160163-13139376-c07d-4898-8917-eaaf8f1681ce.mov
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Resources
 
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [Prelogin animation](https://lottiefiles.com/141560-loader-v25)
