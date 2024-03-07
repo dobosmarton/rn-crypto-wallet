@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import useSWRMutation from 'swr/mutation';
 import {Transaction, getTransactions} from '../libs/scan';
 import {CurrencyTypes, useConfig} from './useConfig';
+import Web3 from 'web3';
 
 export type UseTransactionHistory = (
   address: string | undefined,
@@ -36,7 +37,7 @@ export const useTransactionHistory: UseTransactionHistory = (address, type) => {
       address: _address,
       page,
       offset,
-      endblock: endblock.number,
+      endblock: Web3.utils.toNumber(endblock.number) as number,
       config: {apiKey: scanApiKey},
     });
   };

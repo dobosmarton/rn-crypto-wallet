@@ -1,11 +1,12 @@
-import {Account, TransactionReceipt} from 'web3-core';
+import {TransactionReceipt} from 'web3';
+import {Web3Account} from 'web3-eth-accounts';
 import {Web3Instance} from '../libs/web3';
 import {useEffect, useState} from 'react';
 import {useDebounce} from './useDebounce';
 import {useLoading} from './useLoading';
 
 type UseTransaction = (props: {
-  account: Account | null;
+  account: Web3Account | null;
   web3Instance?: Web3Instance;
 }) => {
   isLoading: boolean;
@@ -44,7 +45,7 @@ export const useTransaction: UseTransaction = ({account, web3Instance}) => {
       ? null
       : TransactionsErrorMessages.INVALID_RECEIVER_ADDRESS;
 
-  const estimateGasPrice = (amount: string): Promise<string | null> =>
+  const estimateGasPrice = async (amount: string): Promise<string | null> =>
     withLoading(async () => {
       try {
         if (account && web3Instance && parseFloat(amount)) {
@@ -72,7 +73,7 @@ export const useTransaction: UseTransaction = ({account, web3Instance}) => {
     setTransactionAmount(value);
   };
 
-  const sendTransaction = () =>
+  const sendTransaction = async () =>
     withLoading(async () => {
       try {
         if (!web3Instance || !account) {

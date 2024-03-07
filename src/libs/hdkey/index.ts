@@ -5,12 +5,13 @@ import * as secureStore from '../secureStore';
 
 export const generatePrivateKey = async (seed: string) => {
   const res = deriveHdPrivateNodeFromSeed(
+    Buffer.from(seed, 'utf8'),
+    undefined,
     {
       sha512: {
         hash: input => new Uint8Array(sha512.arrayBuffer(input)),
       },
     },
-    Buffer.from(seed, 'utf8'),
   );
   if (res.valid) {
     const privateKey = Buffer.from(res.privateKey).toString('hex');

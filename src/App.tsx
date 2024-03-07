@@ -9,7 +9,7 @@ import {PolygonAccountProvider} from './context/polygon.provider';
 import {EthereumAccountProvider} from './context/ethereum.provider';
 import {NavigationRoot} from './navigation';
 
-function App(): JSX.Element {
+function App(): React.JSX.Element {
   return (
     <SafeAreaProvider>
       <EthereumAccountProvider>

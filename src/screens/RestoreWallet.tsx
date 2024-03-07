@@ -51,7 +51,7 @@ export const RestoreWalletScreen: React.FunctionComponent<Props> = ({
       return newList;
     });
 
-  const onRestoreWallet = (password: string) =>
+  const onRestoreWallet = async (password: string) =>
     withLoading(async () => {
       try {
         const seed = await generateSeed(password, wordList);

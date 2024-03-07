@@ -40,10 +40,11 @@ interface Data {
   config: Config;
 }
 
-export const getTransactions: MutationFetcher<Transaction[], Data> = async (
-  url: string,
-  {arg}: {arg: Data},
-) => {
+export const getTransactions: MutationFetcher<
+  Transaction[],
+  string,
+  Data
+> = async (url: string, {arg}: {arg: Data}) => {
   if (!arg.config.apiKey) {
     throw new Error('Polygonscan env variables are not defined!');
   }

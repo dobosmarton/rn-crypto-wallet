@@ -1,12 +1,11 @@
-import Web3 from 'web3';
-import {
-  Account,
-  TransactionConfig,
+import Web3, {
+  Block,
+  BlockNumberOrTag,
+  Transaction,
   TransactionReceipt,
-  BlockNumber,
-} from 'web3-core';
-import {BlockTransactionObject, Transaction} from 'web3-eth';
-import {convertStringToNumSafely} from '../../utils/numbers';
+} from 'web3';
+import {Web3Account} from 'web3-eth-accounts';
+import {isAddress} from 'web3-validator';
 
 type TransactionProps = {
   addressFrom: string;
@@ -17,14 +16,12 @@ type TransactionProps = {
 
 export type Web3Instance = {
   isValidAddress: (address: string) => boolean;
-  privateKeyToAccount: (privateKey: string) => Account;
+  privateKeyToAccount: (privateKey: string) => Web3Account;
   getBalance: (address: string) => Promise<string>;
-  getLatestBlock: () => Promise<BlockTransactionObject>;
-  getBlock: (
-    blockHashOrBlockNumber: BlockNumber,
-  ) => Promise<BlockTransactionObject>;
+  getLatestBlock: () => Promise<Block>;
+  getBlock: (blockHashOrBlockNumber: BlockNumberOrTag) => Promise<Block>;
   getTransaction: (hash: string) => Promise<Transaction>;
-  getTransactionCount: (address: string) => Promise<number>;
+  getTransactionCount: (address: string) => Promise<bigint>;
   estimateGasPrice: (address: string, amount: string) => Promise<string | null>;
   sendTransaction: (
     props: TransactionProps,
@@ -32,8 +29,8 @@ export type Web3Instance = {
 };
 
 export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
-  const privateKeyToAccount = (privateKey: string): Account =>
-    web3Instance.eth.accounts.privateKeyToAccount(privateKey, true);
+  const privateKeyToAccount = (privateKey: string): Web3Account =>
+    web3Instance.eth.accounts.privateKeyToAccount(privateKey);
 
   const getBalance = async (address: string): Promise<string> => {
     const balance = await web3Instance.eth.getBalance(address);
@@ -44,8 +41,7 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
     address: string,
     amount: string,
   ): Promise<string> => {
-    const gasPriceText = await web3Instance.eth.getGasPrice();
-    const gasPrice = convertStringToNumSafely(gasPriceText);
+    const gasPrice = await web3Instance.eth.getGasPrice();
     const amountValue = web3Instance.utils.toWei(amount, 'ether');
     const estimatedGas = await web3Instance.eth.estimateGas({
       from: address,
@@ -55,12 +51,11 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
     return web3Instance.utils.fromWei(String(gasPrice * estimatedGas), 'ether');
   };
 
-  const isValidAddress = (address: string) =>
-    web3Instance.utils.isAddress(address);
+  const isValidAddress = (address: string) => isAddress(address);
 
   const getLatestBlock = () => web3Instance.eth.getBlock('latest', true);
 
-  const getBlock = (blockHashOrBlockNumber: BlockNumber) =>
+  const getBlock = (blockHashOrBlockNumber: BlockNumberOrTag) =>
     web3Instance.eth.getBlock(blockHashOrBlockNumber, true);
 
   const getTransactionCount = (address: string) =>
@@ -85,7 +80,7 @@ export const web3LibBuilder = (web3Instance: Web3): Web3Instance => {
       value: valueToWei,
     });
 
-    const rawTransaction: TransactionConfig = {
+    const rawTransaction: Transaction = {
       from: props.addressFrom,
       to: props.addressTo,
       value: valueToWei,
